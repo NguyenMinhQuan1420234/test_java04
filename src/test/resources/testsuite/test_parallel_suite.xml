@@ -1,0 +1,14 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="suite" parallel="tests" thread-count="2">
+<!--    <parameter name="browser" value="IE"/>-->
+    <test name="RegisterStudentForm">
+        <classes>
+            <class name="com.hoadoan.assetmanagement.tests.RegisterStudentForm" />
+        </classes>
+    </test>
+    <test name="Login">
+        <classes>
+            <class name="com.hoadoan.assetmanagement.tests.LoginTest" />
+        </classes>
+    </test>
+</suite>
