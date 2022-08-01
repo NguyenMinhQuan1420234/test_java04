@@ -1,0 +1,40 @@
+{
+  "validUserData" :
+    [
+      {
+        "firstName": "quan",
+        "lastName": "nguyen",
+        "dateOfBirth": "05/09/1996",
+        "gender": "Male",
+        "joinDate": "01/07/2022",
+        "type": "ADMIN"
+      },
+      {
+        "firstName": "Nam",
+        "lastName": "nguyen",
+        "dateOfBirth": "22/02/2000",
+        "gender": "Female",
+        "joinDate": "22/02/2022",
+        "type": "STAFF"
+      }
+    ],
+  "invalidUserData":
+    [
+      {
+        "firstName": "quan2",
+        "lastName": "nguyen",
+        "dateOfBirth": "22/02/2000",
+        "gender": "female",
+        "joinDate": "22/2/2022",
+        "type": "STAFF"
+      },
+      {
+        "firstName": "quan3",
+        "lastName": "nguyen",
+        "dateOfBirth": "02/02/2000",
+        "gender": "male",
+        "joinDate": "22/2/2021",
+        "type": "STAFF"
+      }
+    ]
+}

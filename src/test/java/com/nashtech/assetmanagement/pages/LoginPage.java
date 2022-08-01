@@ -4,35 +4,26 @@ import org.openqa.selenium.By;
 
 public class LoginPage extends BasePage{
     /** ------------------ Web Elements ----------------------*/
-    private final By txtUserName = By.id("userName");
-    private final By txtPassword = By.id("password");
-    private final By btnLogin = By.id("login");
-    private final By lblErrorMessage = By.id("name");
-    private final By iconUsernameError= By.cssSelector("#userName-wrapper .is-invalid");
-    private final By iconPasswordError= By.cssSelector("#password-wrapper .is-invalid");
+    private final By TXT_USERNAME = By.id("username");
+    private final By TXT_PASSWORD = By.id("password");
+    private final By BTN_LOGIN = By.cssSelector("button");
 
     /** -------------------- Page Methods ---------------------*/
     public void inputUserName(String username) {
-        inputText(txtUserName, username);
+        inputText(TXT_USERNAME, username);
     }
 
     public void inputPassword(String password) {
-        inputText(txtPassword, password);
+        inputText(TXT_PASSWORD, password);
     }
 
     public void clickLoginBtn() {
-        clickElement(btnLogin);
+        clickElement(BTN_LOGIN);
     }
 
-    public String getErrorMessage() {
-        return getText(lblErrorMessage);
-    }
-
-    public boolean isErrorIconDisplayedInUsername() {
-        return isElementDisplayed(iconUsernameError);
-    }
-
-    public boolean isErrorIconDisplayedInPassword() {
-        return isElementDisplayed(iconPasswordError);
+    public void loginWithAdminAccount() {
+        inputUserName(System.getProperty("USERNAME"));
+        inputPassword(System.getProperty("PASSWORD"));
+        clickLoginBtn();
     }
 }

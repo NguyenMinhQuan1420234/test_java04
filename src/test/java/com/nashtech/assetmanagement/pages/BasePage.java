@@ -9,6 +9,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -48,6 +49,9 @@ public class BasePage {
     }
 
     //  ------------------- Query Element -----------------------------
+    public static WebElement findElement(By locator) {
+        return Browser.getDriver().findElement(locator);
+    }
 
     public static List<WebElement> findElements(By locator) {
         return Browser.getDriver().findElements(locator);
@@ -94,6 +98,10 @@ public class BasePage {
     public static void waitForInvisibilityOfElementLocated(By locator) {
         WebDriverWait wait = new WebDriverWait(Browser.getDriver(), Duration.ofSeconds(SELENIUM_TIMEOUT_SECONDS));
         wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
+    }
+    public static void waitForStalenessOfElementLocated(WebElement element) {
+        WebDriverWait wait = new WebDriverWait(Browser.getDriver(), Duration.ofSeconds(SELENIUM_TIMEOUT_SECONDS));
+        wait.until(ExpectedConditions.stalenessOf(element));
     }
 
     public static WebElement waitForElementToBeClickable(By locator) {
@@ -208,6 +216,10 @@ public class BasePage {
         js.executeScript("window.scrollBy(0,document.body.scrollHeight)");
     }
 
+    public void selectElementValue(By locator, String value){
+        Select elementSelect = new Select(waitForElementToBeClickable(locator));
+        elementSelect.selectByVisibleText(value);
+    }
 }
 
 

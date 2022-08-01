@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.Locale;
 
 public class DateUtil {
-    final static String DEFAULT_DATE_TIME = "dd MMM yyyy";
+    final static String DEFAULT_DATE_TIME = "dd/MM/yyyy";
     public static String getCurrentDate(String format) {
         DateFormat dateFormat = new SimpleDateFormat(format);
         Date currentDate = new Date();
