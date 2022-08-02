@@ -24,17 +24,28 @@
         "firstName": "quan2",
         "lastName": "nguyen",
         "dateOfBirth": "22/02/2000",
-        "gender": "female",
-        "joinDate": "22/2/2022",
+        "gender": "Female",
+        "joinDate": "22/2/2010",
         "type": "STAFF"
       },
       {
-        "firstName": "quan3",
+        "firstName": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
         "lastName": "nguyen",
         "dateOfBirth": "02/02/2000",
-        "gender": "male",
+        "gender": "Male",
         "joinDate": "22/2/2021",
-        "type": "STAFF"
+        "type": "ADMIN"
       }
-    ]
+    ],
+  "changePassUserData":
+  {
+    "firstName": "Goku",
+    "lastName": "Son",
+    "dateOfBirth": "17/05/1989",
+    "gender": "Male",
+    "joinDate": "22/2/2021",
+    "type": "ADMIN",
+    "password": "gokus@17051989",
+    "newPassword": "123456"
+  }
 }

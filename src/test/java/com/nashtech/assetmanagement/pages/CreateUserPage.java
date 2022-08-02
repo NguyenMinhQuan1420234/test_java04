@@ -1,5 +1,6 @@
 package com.nashtech.assetmanagement.pages;
 
+import com.google.gson.JsonObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 
@@ -61,6 +62,16 @@ public class CreateUserPage extends  BasePage {
     public void clickButton(String text) {
         By BTN = By.id(String.format("%s", text));
         clickElement(BTN);
+    }
+
+    public void createUser(JsonObject user){
+        inputFirstname(user.get("firstName").getAsString());
+        inputLastname(user.get("lastName").getAsString());
+        inputDateOfBirth(user.get("dateOfBirth").getAsString());
+        selectGender(user.get("gender").getAsString());
+        inputJoinDate(user.get("joinDate").getAsString());
+        selectUserType(user.get("type").getAsString());
+        clickButton("save");
     }
 
 }

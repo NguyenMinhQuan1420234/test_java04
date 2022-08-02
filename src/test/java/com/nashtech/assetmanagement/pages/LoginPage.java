@@ -26,4 +26,10 @@ public class LoginPage extends BasePage{
         inputPassword(System.getProperty("PASSWORD"));
         clickLoginBtn();
     }
+
+    public void loginWithCustomAccount(String username, String password) {
+        inputUserName(username);
+        inputPassword(password);
+        clickLoginBtn();
+    }
 }

@@ -7,7 +7,9 @@ public class ManageUserPage extends BasePage{
     private final By BTN_CREATE_NEW_USER = By.xpath("//button[text()='Create new user']");
     private final By NOF_LOADING = By.xpath("//div[@id='NotiflixLoadingWrap']/div");
     private final By FIRST_USER = By.xpath("//tbody/tr[1]");
-    private final By MSG_CREATE_USER_SUCCESS = By.xpath("//div[@role='alert']/div[2]");
+    private final By LBL_USER_LIST = By.xpath("//div/h3");
+
+
     /** -------------------- Page Methods ---------------------*/
     public void clickCreateNewUserButton() {
         waitForStalenessOfElementLocated(findElement(NOF_LOADING));
@@ -18,7 +20,7 @@ public class ManageUserPage extends BasePage{
         clickElement(FIRST_USER);
     }
 
-    public String getTextCreateMessageSuccessfully() {
-        return getText(MSG_CREATE_USER_SUCCESS);
+    public String getPageLabelText() {
+        return getText(LBL_USER_LIST);
     }
 }
