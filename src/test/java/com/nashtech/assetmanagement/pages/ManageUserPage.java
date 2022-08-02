@@ -8,6 +8,8 @@ public class ManageUserPage extends BasePage{
     private final By NOF_LOADING = By.xpath("//div[@id='NotiflixLoadingWrap']/div");
     private final By FIRST_USER = By.xpath("//tbody/tr[1]");
     private final By LBL_USER_LIST = By.xpath("//div/h3");
+    private final By LBL_LOCATION_LIST = By.xpath("(//div[@class='detail-item']/div[text()='Location']/following-sibling::div)[i]");
+    private final By BTN_PAGING = By.xpath("//button[@class='btn btn-outline-danger']");
 
 
     /** -------------------- Page Methods ---------------------*/
@@ -22,5 +24,9 @@ public class ManageUserPage extends BasePage{
 
     public String getPageLabelText() {
         return getText(LBL_USER_LIST);
+    }
+
+    public void getListOfUserLocation() {
+
     }
 }

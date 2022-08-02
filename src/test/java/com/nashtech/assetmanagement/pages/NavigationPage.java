@@ -20,8 +20,12 @@ public class NavigationPage extends BasePage{
     public static final By MODAL_CHANGEPASSWORD = By.xpath("//div[@id='changePasswordModal']//h5");
     public static final By TXT_OLDPASS = By.id("old-pass");
     public static final By TXT_NEWPASS = By.id("new-pass");
+    public static final By TXT_FIRSTTIME_CHANGEPASSWORD = By.id("pass");
+    public static final By BTN_SAVE_FIRSTLOGIN = By.cssSelector(".change-password~.button-save>button");
     public static final By BTN_SAVE = By.xpath("//div[@id='changePasswordModal']//button[text()='Save']");
     public static final By BTN_CANCEL_CHANGEPASSWORD = By.xpath("//div[@id='changePasswordModal']//button[@id='btnCancel']");
+    public static final By FRM_CHANGEPASSWORD_SUCCESSFULLY = By.xpath("//p");
+    public static final By BTN_CLOSE_FORM = By.xpath("//button[text()='Close']");
     /**-------Side Bar-------*/
 
     public static final By LNK_MENU_HOME = By.xpath("//a[contains(text(),'Home')]");
@@ -54,6 +58,11 @@ public class NavigationPage extends BasePage{
         clearAndType(TXT_OLDPASS, oldPass, true);
         clearAndType(TXT_NEWPASS, newPass, true);
         clickElement(BTN_SAVE);
+    }
+
+    public void changePasswordFirstLogin(String newPass) {
+        inputText(TXT_FIRSTTIME_CHANGEPASSWORD, newPass);
+        clickElement(BTN_SAVE_FIRSTLOGIN);
     }
 
 

@@ -5,16 +5,20 @@
         "firstName": "quan",
         "lastName": "nguyen",
         "dateOfBirth": "05/09/1996",
+        "dateOfBirthDetailFormat": "09/05/1996",
         "gender": "Male",
         "joinDate": "01/07/2022",
+        "joinDateDetailFormat": "07/01/2022",
         "type": "ADMIN"
       },
       {
         "firstName": "Nam",
         "lastName": "nguyen",
         "dateOfBirth": "22/02/2000",
+        "dateOfBirthDetailFormat": "02/22/2000",
         "gender": "Female",
         "joinDate": "22/02/2022",
+        "joinDateDetailFormat": "02/22/1996",
         "type": "STAFF"
       }
     ],
@@ -24,6 +28,7 @@
         "firstName": "quan2",
         "lastName": "nguyen",
         "dateOfBirth": "22/02/2000",
+        "dateOfBirthDetailFormat": "02/22/2000",
         "gender": "Female",
         "joinDate": "22/2/2010",
         "type": "STAFF"
@@ -45,7 +50,18 @@
     "gender": "Male",
     "joinDate": "22/2/2021",
     "type": "ADMIN",
-    "password": "gokus@17051989",
+    "password": "@17051989",
     "newPassword": "123456"
-  }
+  },
+  "Admin":
+  [
+    {
+      "username": "quann",
+      "password": "123456"
+    },
+    {
+
+    }
+  ]
+
 }
