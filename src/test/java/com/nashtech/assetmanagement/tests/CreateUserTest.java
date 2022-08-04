@@ -17,7 +17,7 @@ public class CreateUserTest extends BaseTest {
     CreateUserPage createUserPage;
     HomePage homePage;
     ManageUserPage manageUserPage;
-    DetailInformationPage detailInformationPage;
+    DetailedInformationPage detailInformationPage;
     ModalHandle alertHandle;
 
     @BeforeMethod
@@ -26,7 +26,7 @@ public class CreateUserTest extends BaseTest {
         createUserPage = new CreateUserPage();
         homePage = new HomePage();
         manageUserPage = new ManageUserPage();
-        detailInformationPage = new DetailInformationPage();
+        detailInformationPage = new DetailedInformationPage();
         alertHandle = new ModalHandle();
         loginPage.loginWithAdminAccount();
     }

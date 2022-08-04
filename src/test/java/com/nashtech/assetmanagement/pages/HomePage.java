@@ -11,7 +11,7 @@ public class HomePage extends BasePage{
     public static final By LBL_USERNAME = By.id("user_header");
     public static final By DDL_HEADER_MENU = By.id("dropdownMenuReference");
     public static final By OPT_LOGOUT = By.xpath("//li[text()='Logout']");
-    public static final By OPT_CHANGEPASSWORD = By.xpath("//a[text()='Change password']");
+    public static final By OPT_CHANGEPASSWORD = By.id("li-bottom");
     /**-------Logout-------*/
     public static final By MODAL_LOGOUT = By.xpath("//div[@id='logoutModal']//h5");
     public static final By BTN_LOGOUT = By.id("btnLogout");
@@ -24,8 +24,11 @@ public class HomePage extends BasePage{
     public static final By BTN_SAVE_FIRSTLOGIN = By.cssSelector(".change-password~.button-save>button");
     public static final By BTN_SAVE = By.xpath("//div[@id='changePasswordModal']//button[text()='Save']");
     public static final By BTN_CANCEL_CHANGEPASSWORD = By.xpath("//div[@id='changePasswordModal']//button[@id='btnCancel']");
-    public static final By FRM_CHANGEPASSWORD_SUCCESSFULLY = By.xpath("//p");
+    public static final By LBL_CHANGEPASSWORD_SUCCESSFULLY = By.xpath("//div[@id='modalSuccess']//p");
     public static final By BTN_CLOSE_FORM = By.xpath("//button[text()='Close']");
+    public static final By MSG_OLDPASSWORD = By.xpath("#old-pass~p");
+
+
     /**-------Side Bar-------*/
 
     public static final By LNK_MENU_HOME = By.xpath("//a[contains(text(),'Home')]");
@@ -65,5 +68,15 @@ public class HomePage extends BasePage{
         clickElement(BTN_SAVE_FIRSTLOGIN);
     }
 
+    public void closeMsg() {
+        clickElement(BTN_CLOSE_FORM);
+    }
 
+    public String getChangePasswordMessage() {
+        return getText(LBL_CHANGEPASSWORD_SUCCESSFULLY);
+    }
+
+    public String getTextWrongOldPassword() {
+        return getText(MSG_OLDPASSWORD);
+    }
 }

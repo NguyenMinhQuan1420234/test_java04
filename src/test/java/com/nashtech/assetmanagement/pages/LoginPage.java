@@ -7,6 +7,10 @@ public class LoginPage extends BasePage{
     private final By TXT_USERNAME = By.id("username");
     private final By TXT_PASSWORD = By.id("password");
     private final By BTN_LOGIN = By.cssSelector("button");
+    private final By LBL_ERROR_MSG = By.id("name");
+    private final By ICON_USERNAME_ERROR = By.cssSelector("#userName-wrapper .is-invalid");
+    private final By ICON_PASSWORD_ERROR = By.cssSelector("#password-wrapper .is-invalid");
+
 
     /** -------------------- Page Methods ---------------------*/
     public void inputUserName(String username) {
@@ -31,5 +35,17 @@ public class LoginPage extends BasePage{
         inputUserName(username);
         inputPassword(password);
         clickLoginBtn();
+    }
+
+    public String getErrorMessage() {
+        return getText(LBL_ERROR_MSG);
+    }
+
+    public boolean isErrorIconDisplayedInUsername() {
+        return isElementDisplayed(ICON_USERNAME_ERROR);
+    }
+
+    public boolean isErrorIconDisplayedInPassword() {
+        return isElementDisplayed(ICON_PASSWORD_ERROR);
     }
 }

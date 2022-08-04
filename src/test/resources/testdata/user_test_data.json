@@ -54,14 +54,17 @@
     "newPassword": "123456"
   },
   "Admin":
-  [
     {
       "username": "quann",
-      "password": "123456"
+      "oldPassword": "123456",
+      "newPassword": "monaLisa"
     },
-    {
+  "Staff":
+  {
+    "username": "quans1",
+    "oldPassword": "123456",
+    "newPassword": "BitCoin"
+  }
 
-    }
-  ]
 
 }

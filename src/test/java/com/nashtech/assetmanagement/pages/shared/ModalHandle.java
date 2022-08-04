@@ -6,15 +6,16 @@ import org.openqa.selenium.By;
 public class ModalHandle extends BasePage {
     /** ------------------ Web Elements ----------------------*/
     public final By MSG_POPUP = By.cssSelector("div[class*='toast-body']>div:last-child");
+    public final By BTN_CLOSE = By.cssSelector("div[class*='toast-body']~button");
     /** -------------------- Page Methods ---------------------*/
     public String getPopupMessageText() {
         return getText(MSG_POPUP);
     }
     public void closePopup() {
-        clickElement(MSG_POPUP);
+        clickElement(BTN_CLOSE);
     }
-    public void waitForAlertMessageDisappear(String message) {
-        waitForInvisibilityOfElementLocated(By.xpath(String.format("//div[text()='%s']", message)));
+    public void waitForAlertMessageDisappear() {
+        waitForStalenessOfElementLocated(findElement(MSG_POPUP));
     }
 
 }

@@ -29,11 +29,22 @@ public class DataProviderUser {
         };
     }
 
-    @DataProvider(name = "changePasswordAccount")
-    public static Object[][] changePasswordAccount() {
+    @DataProvider(name = "changePasswordAccountFirstLogin")
+    public static Object[][] changePasswordAccountFirstLogin() {
         JsonObject user = userList.getAsJsonObject("changePassUserData");
         return new Object[][]{
                 {user}
         };
     }
+
+    @DataProvider(name = "changePasswordAccount")
+    public static Object[][] changePasswordAccount() {
+        JsonObject admin = userList.getAsJsonObject("Admin");
+        JsonObject staff = userList.getAsJsonObject("Staff");
+        return new Object[][]{
+                {admin}, {staff}
+        };
+    }
+
+
 }
