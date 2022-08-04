@@ -1,4 +1,6 @@
 ### Java template
+# Git file
+.DS_Store
 # Compiled class file
 *.class
 

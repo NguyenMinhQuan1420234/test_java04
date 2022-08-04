@@ -1,13 +1,10 @@
 package com.nashtech.assetmanagement.tests;
 
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.nashtech.assetmanagement.dataProvider.DataProviderUser;
 import com.nashtech.assetmanagement.pages.*;
-import com.nashtech.assetmanagement.pages.shared.AlertHandle;
-import org.testng.annotations.AfterMethod;
+import com.nashtech.assetmanagement.pages.shared.ModalHandle;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static com.nashtech.assetmanagement.utils.DateUtil.convertDateStringToDateStringByFormat;
@@ -18,26 +15,26 @@ import static org.hamcrest.Matchers.equalTo;
 public class CreateUserTest extends BaseTest {
     LoginPage loginPage;
     CreateUserPage createUserPage;
-    NavigationPage navigationPage;
+    HomePage homePage;
     ManageUserPage manageUserPage;
     DetailInformationPage detailInformationPage;
-    AlertHandle alertHandle;
+    ModalHandle alertHandle;
 
     @BeforeMethod
     public void precondition() {
         loginPage = new LoginPage();
         createUserPage = new CreateUserPage();
-        navigationPage = new NavigationPage();
+        homePage = new HomePage();
         manageUserPage = new ManageUserPage();
         detailInformationPage = new DetailInformationPage();
-        alertHandle = new AlertHandle();
+        alertHandle = new ModalHandle();
         loginPage.loginWithAdminAccount();
     }
 
     @Test(dataProvider = "createUserWithAdminAccount", dataProviderClass = DataProviderUser.class)
     public void createUserSuccessfully(JsonObject user) {
 
-        navigationPage.moveToPage("Manage User");
+        homePage.moveToPage("Manage User");
         manageUserPage.clickCreateNewUserButton();
         createUserPage.inputFirstname(user.get("firstName").getAsString());
         createUserPage.inputLastname(user.get("lastName").getAsString());
@@ -49,41 +46,17 @@ public class CreateUserTest extends BaseTest {
 
         assertThat(
                 "verify create message: ",
-                alertHandle.getPopupMessageText(alertHandle.createMsg),
+                alertHandle.getPopupMessageText(),
                 equalTo("Successfully added!!")
         );
 
-        manageUserPage.clickDetailFirstUser();
-
-        assertThat(
-                "verify firstname: ",
-                (user.get("firstName").getAsString() +" "+ user.get("lastName").getAsString()),
-                equalTo(detailInformationPage.getTextOfUserLabel("Full Name"))
-        );
-        assertThat(
-                "verify date of birth: ",
-                convertDateStringToDateStringByFormat(user.get("dateOfBirth").getAsString(), "MM/dd/yyyy"),
-                equalTo(detailInformationPage.getTextOfUserLabel("Date Of Birth"))
-        );
-        assertThat(
-                "verify gender: ",
-                user.get("gender").getAsString(),
-                equalTo(detailInformationPage.getTextOfUserLabel("Gender"))
-        );
-        assertThat(
-                "verify join date: ",
-                convertDateStringToDateStringByFormat(user.get("joinDate").getAsString(),"MM/dd/yyyy"),
-                equalTo(detailInformationPage.getTextOfUserLabel("Joined Date")));
-        assertThat(
-                "verify type: ",
-                user.get("type").getAsString(),
-                equalTo(detailInformationPage.getTextOfUserLabel("Type")));
+        alertHandle.closePopup();
     }
 
     @Test(dataProvider = "createUserAccount", dataProviderClass = DataProviderUser.class)
     public void verifyNewUserAddedToTopOfUserListSuccessfully(JsonObject user) {
 
-        navigationPage.moveToPage("Manage User");
+        homePage.moveToPage("Manage User");
         manageUserPage.clickCreateNewUserButton();
         createUserPage.inputFirstname(user.get("firstName").getAsString());
         createUserPage.inputLastname(user.get("lastName").getAsString());
@@ -98,35 +71,35 @@ public class CreateUserTest extends BaseTest {
         assertThat(
                 "verify firstname: ",
                 (user.get("firstName").getAsString() +" "+ user.get("lastName").getAsString()),
-                equalTo(detailInformationPage.getTextOfUserLabel("Full Name"))
+                equalTo(detailInformationPage.getUserDetail("Full Name"))
         );
 
         assertThat(
                 "verify date of birth: ",
                 convertDateStringToDateStringByFormat(user.get("dateOfBirth").getAsString(), "MM/dd/yyyy"),
-                equalTo(detailInformationPage.getTextOfUserLabel("Date Of Birth"))
+                equalTo(detailInformationPage.getUserDetail("Date Of Birth"))
         );
         assertThat(
                 "verify gender: ",
                 user.get("gender").getAsString(),
-                equalTo(detailInformationPage.getTextOfUserLabel("Gender"))
+                equalTo(detailInformationPage.getUserDetail("Gender"))
         );
         assertThat(
                 "verify join date: ",
                 convertDateStringToDateStringByFormat(user.get("joinDate").getAsString(),"MM/dd/yyyy"),
-                equalTo(detailInformationPage.getTextOfUserLabel("Joined Date"))
+                equalTo(detailInformationPage.getUserDetail("Joined Date"))
         );
         assertThat(
                 "verify type: ",
                 user.get("type").getAsString(),
-                equalTo(detailInformationPage.getTextOfUserLabel("Type"))
+                equalTo(detailInformationPage.getUserDetail("Type"))
         );
     }
 
     @Test(dataProvider = "createUserAccount", dataProviderClass = DataProviderUser.class)
     public void verifyClickCancelButtonBackToManageUserPage(JsonObject user) {
 
-        navigationPage.moveToPage("Manage User");
+        homePage.moveToPage("Manage User");
         manageUserPage.clickCreateNewUserButton();
         createUserPage.inputFirstname(user.get("firstName").getAsString());
         createUserPage.inputLastname(user.get("lastName").getAsString());
@@ -138,7 +111,7 @@ public class CreateUserTest extends BaseTest {
 
         assertThat(
                 "verify cancel button: ",
-                manageUserPage.getPageLabelText(),
+                manageUserPage.getPageTitle(),
                 equalTo("User List")
         );
     }

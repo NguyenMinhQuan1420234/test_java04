@@ -22,11 +22,8 @@ public class ManageUserPage extends BasePage{
         clickElement(FIRST_USER);
     }
 
-    public String getPageLabelText() {
+    public String getPageTitle() {
         return getText(LBL_USER_LIST);
     }
 
-    public void getListOfUserLocation() {
-
-    }
 }

@@ -3,17 +3,16 @@ package com.nashtech.assetmanagement.pages.shared;
 import com.nashtech.assetmanagement.pages.BasePage;
 import org.openqa.selenium.By;
 
-public class AlertHandle extends BasePage {
+public class ModalHandle extends BasePage {
     /** ------------------ Web Elements ----------------------*/
-    public final String loginMsg = "Login success!!!";
-    public final String createMsg = "Successfully added!!";
-    public final String disableMsg = "User is disabled";
-    public final String changePassWordMsg = "Change Password success!!!";
+    public final By MSG_POPUP = By.cssSelector("div[class*='toast-body']>div:last-child");
     /** -------------------- Page Methods ---------------------*/
-    public String getPopupMessageText(String message) {
-        return getText(By.xpath(String.format("//div[text()='%s']", message)));
+    public String getPopupMessageText() {
+        return getText(MSG_POPUP);
     }
-
+    public void closePopup() {
+        clickElement(MSG_POPUP);
+    }
     public void waitForAlertMessageDisappear(String message) {
         waitForInvisibilityOfElementLocated(By.xpath(String.format("//div[text()='%s']", message)));
     }

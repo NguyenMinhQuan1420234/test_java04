@@ -2,7 +2,7 @@ package com.nashtech.assetmanagement.pages;
 
 import org.openqa.selenium.By;
 
-public class NavigationPage extends BasePage{
+public class HomePage extends BasePage{
 
     /** ------------------ Web Elements ----------------------*/
 

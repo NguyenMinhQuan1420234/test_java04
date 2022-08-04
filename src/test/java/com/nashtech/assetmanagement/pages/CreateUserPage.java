@@ -13,8 +13,6 @@ public class CreateUserPage extends  BasePage {
     private final By RDO_FEMALE = By.id("female");
     private final By TXT_JOINDATE = By.id("joinedDate");
     private final By DDL_TYPE = By.id("cars");
-    private final By OPT_ADMIN = By.xpath("//select[@id='cars']/option[1]");
-    private final By OPT_STAFF = By.xpath("//select[@id='cars']/option[2]");
     private final By DDL_LOCATION = By.xpath("//label[text()='Location']/following-sibling::select");
     /** -------------------- Page Methods ---------------------*/
     public void inputFirstname(String firstname) {
@@ -42,10 +40,7 @@ public class CreateUserPage extends  BasePage {
 
     public void selectUserType(String type) {
         clickElement(DDL_TYPE);
-        if(type.equals("ADMIN"))
-            selectElementValue(DDL_TYPE,"ADMIN");
-        else if (type.equals("STAFF"))
-            selectElementValue(DDL_TYPE,"STAFF");
+        selectElementValue(DDL_TYPE,type);
     }
 
     public void selectAdminLocation(String location) {

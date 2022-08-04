@@ -3,7 +3,7 @@ package com.nashtech.assetmanagement.tests;
 import com.google.gson.JsonObject;
 import com.nashtech.assetmanagement.dataProvider.DataProviderUser;
 import com.nashtech.assetmanagement.pages.*;
-import com.nashtech.assetmanagement.pages.shared.AlertHandle;
+import com.nashtech.assetmanagement.pages.shared.ModalHandle;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -14,18 +14,18 @@ public class ChangePasswordTest extends BaseTest {
     LoginPage loginPage;
     ManageUserPage manageUserPage;
     CreateUserPage createUserPage;
-    NavigationPage navigationPage;
+    HomePage homePage;
     DetailInformationPage detailInformationPage;
-    AlertHandle alertHandle;
+    ModalHandle alertHandle;
 
     @BeforeMethod()
     public void createNewUser() {
         loginPage = new LoginPage();
         manageUserPage = new ManageUserPage();
         createUserPage = new CreateUserPage();
-        navigationPage = new NavigationPage();
+        homePage = new HomePage();
         detailInformationPage = new DetailInformationPage();
-        alertHandle = new AlertHandle();
+        alertHandle = new ModalHandle();
 
         loginPage.loginWithAdminAccount();
     }
@@ -33,31 +33,33 @@ public class ChangePasswordTest extends BaseTest {
     @Test(dataProvider = "changePasswordAccount", dataProviderClass = DataProviderUser.class)
     public void changePasswordFirstLoginSuccessfully(JsonObject user) {
 
-        navigationPage.moveToPage("Manage User");
+        homePage.moveToPage("Manage User");
         manageUserPage.clickCreateNewUserButton();
         createUserPage.createUser(user);
         manageUserPage.clickDetailFirstUser();
-        detailInformationPage.clickCloseFormButton(detailInformationPage.getTextOfUserLabel("Staff Code"));
-        String username = detailInformationPage.getTextOfUserLabel("Username");
+        detailInformationPage.clickClose(detailInformationPage.getUserDetail("Staff Code"));
+        String username = detailInformationPage.getUserDetail("Username");
         String accountPassword = username + user.get("password").getAsString();
-        navigationPage.logout();
-        loginPage.loginWithCustomAccount(username, accountPassword);
-        navigationPage.changePasswordFirstLogin(user.get("newPassword").getAsString());
+        homePage.logout();
+        loginPage.login(username, accountPassword);
+        homePage.changePasswordFirstLogin(user.get("newPassword").getAsString());
 
         assertThat("verify message success: ",
-                alertHandle.getPopupMessageText("Change Password success!!!"),
+                alertHandle.getPopupMessageText(),
                 equalTo("Change Password success!!!")
         );
 
+        alertHandle.closePopup();
         alertHandle.waitForAlertMessageDisappear("Change Password success!!!");
-        navigationPage.logout();
-        loginPage.loginWithCustomAccount(username, user.get("newPassword").getAsString());
+        homePage.logout();
+        loginPage.login(username, user.get("newPassword").getAsString());
 
 
         assertThat("verify message login success by new password: ",
-                alertHandle.getPopupMessageText("Login success!!!"),
+                alertHandle.getPopupMessageText(),
                 equalTo("Login success!!!")
         );
+        alertHandle.closePopup();
     }
 
     @Test
