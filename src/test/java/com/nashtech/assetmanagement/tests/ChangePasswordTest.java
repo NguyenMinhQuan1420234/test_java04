@@ -7,7 +7,6 @@ import com.nashtech.assetmanagement.pages.shared.ModalHandle;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static java.lang.Thread.sleep;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
@@ -81,6 +80,28 @@ public class ChangePasswordTest extends BaseTest {
 
     @Test
     public void changePasswordUnsuccessfullyOldPassMatchNewPass() {
+        loginPage.loginWithAdminAccount();
+        alertHandle.closePopup();
+        homePage.changePassword(homePage.randomPasword(), System.getProperty("USERNAME"));
 
+        assertThat(
+                "verify wrong old password ",
+                homePage.getTextWrongOldPassword(),
+                equalTo("Password is incorrect")
+        );
+    }
+
+    @Test
+    public void changePasswordCancel() {
+        loginPage.loginWithAdminAccount();
+        alertHandle.closePopup();
+        homePage.openChangePassword();
+        homePage.clickCancelChangePassword();
+
+        assertThat(
+                "verify modal changepassword has been closed: ",
+                homePage.getModalChangePasswordClosedStatus(),
+                equalTo(true)
+        );
     }
 }

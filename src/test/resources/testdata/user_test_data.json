@@ -55,16 +55,15 @@
   },
   "Admin":
     {
-      "username": "quann",
+      "username": "admint",
       "oldPassword": "123456",
       "newPassword": "monaLisa"
     },
   "Staff":
   {
-    "username": "quans1",
+    "username": "stafft",
     "oldPassword": "123456",
     "newPassword": "BitCoin"
   }
-
 
 }

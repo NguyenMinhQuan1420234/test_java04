@@ -8,7 +8,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.nashtech.assetmanagement.utils.DateUtil.convertDateStringToDateStringByFormat;
-import static java.lang.Thread.sleep;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
@@ -29,6 +28,7 @@ public class CreateUserTest extends BaseTest {
         detailInformationPage = new DetailedInformationPage();
         alertHandle = new ModalHandle();
         loginPage.loginWithAdminAccount();
+        alertHandle.closePopup();
     }
 
     @Test(dataProvider = "createUserWithAdminAccount", dataProviderClass = DataProviderUser.class)

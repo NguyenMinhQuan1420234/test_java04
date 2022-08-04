@@ -1,5 +1,6 @@
 package com.nashtech.assetmanagement.pages;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
 
 public class HomePage extends BasePage{
@@ -17,7 +18,8 @@ public class HomePage extends BasePage{
     public static final By BTN_LOGOUT = By.id("btnLogout");
     public static final By BTN_CANCEL_LOGOUT = By.xpath("//div[@id='logoutModal']//button[@id='btnCancel']");
     /**-------Change Password-------*/
-    public static final By MODAL_CHANGEPASSWORD = By.xpath("//div[@id='changePasswordModal']//h5");
+    public static final By MODAL_CHANGEPASSWORD = By.id("changePasswordModal");
+    public static final By LBL_MODAL_CHANGEPASSWORD = By.xpath("//div[@id='changePasswordModal']//h5");
     public static final By TXT_OLDPASS = By.id("old-pass");
     public static final By TXT_NEWPASS = By.id("new-pass");
     public static final By TXT_FIRSTTIME_CHANGEPASSWORD = By.id("pass");
@@ -26,8 +28,7 @@ public class HomePage extends BasePage{
     public static final By BTN_CANCEL_CHANGEPASSWORD = By.xpath("//div[@id='changePasswordModal']//button[@id='btnCancel']");
     public static final By LBL_CHANGEPASSWORD_SUCCESSFULLY = By.xpath("//div[@id='modalSuccess']//p");
     public static final By BTN_CLOSE_FORM = By.xpath("//button[text()='Close']");
-    public static final By MSG_OLDPASSWORD = By.xpath("#old-pass~p");
-
+    public static final By MSG_OLDPASSWORD = By.cssSelector("#old-pass~p");
 
     /**-------Side Bar-------*/
 
@@ -55,6 +56,15 @@ public class HomePage extends BasePage{
         clickElement(BTN_LOGOUT);
     }
 
+    public  void openChangePassword() {
+        clickElement(DDL_HEADER_MENU);
+        clickElement(OPT_CHANGEPASSWORD);
+    }
+
+    public void clickCancelChangePassword() {
+        clickElement(BTN_CANCEL_CHANGEPASSWORD);
+    }
+
     public void changePassword(String oldPass, String newPass) {
         clickElement(DDL_HEADER_MENU);
         clickElement(OPT_CHANGEPASSWORD);
@@ -78,5 +88,16 @@ public class HomePage extends BasePage{
 
     public String getTextWrongOldPassword() {
         return getText(MSG_OLDPASSWORD);
+    }
+
+    public String randomPasword() {
+        int length = 10;
+        boolean useLetters = true;
+        boolean useNumbers = false;
+        return RandomStringUtils.random(length, useLetters, useNumbers);
+    }
+
+    public boolean getModalChangePasswordClosedStatus(){
+        return !(isElementDisplayed(MODAL_CHANGEPASSWORD));
     }
 }

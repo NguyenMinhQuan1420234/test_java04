@@ -23,7 +23,7 @@
         <extentreports.version>5.0.9</extentreports.version>
         <extentreports-testng-adapter.version>1.2.2</extentreports-testng-adapter.version>
         <slf4j.version>1.7.32</slf4j.version>
-        <lombok.version>1.18.16</lombok.version>
+        <lombok.version>1.18.20</lombok.version>
     </properties>
 
     <profiles>

@@ -1,13 +1,13 @@
 package com.nashtech.assetmanagement.tests;
 
+import com.nashtech.assetmanagement.constants.UrlConstants;
 import com.nashtech.assetmanagement.pages.BasePage;
 import com.nashtech.assetmanagement.pages.HomePage;
 import com.nashtech.assetmanagement.pages.LoginPage;
-import com.nashtech.assetmanagement.constants.UrlConstants;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.testng.annotations.*;
-
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -34,7 +34,7 @@ public class LoginTest extends BaseTest{
         loginPage.inputPassword(password);
         loginPage.clickLoginBtn();
         String actualUsername = homePage.getUserName();
-        assertThat("Verify username", actualUsername, equalTo("hello"));
+        assertThat("Verify username", actualUsername, equalTo("quann"));
 
     }
     @Test
