@@ -6,7 +6,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import com.nashtech.assetmanagement.utils.Pair;
 import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -90,9 +89,9 @@ public class BasePage {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
-    public static void waitForVisibilityOfAllElementsLocatedBy(By locator) {
+    public static List<WebElement> waitForVisibilityOfAllElementsLocatedBy(By locator) {
         WebDriverWait wait = new WebDriverWait(Browser.getDriver(), Duration.ofSeconds(SELENIUM_TIMEOUT_SECONDS));
-        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
+        return wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
     }
 
     public static void waitForInvisibilityOfElementLocated(By locator) {

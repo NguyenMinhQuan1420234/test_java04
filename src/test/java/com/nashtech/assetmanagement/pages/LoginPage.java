@@ -1,6 +1,8 @@
 package com.nashtech.assetmanagement.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 
 public class LoginPage extends BasePage{
     /** ------------------ Web Elements ----------------------*/
@@ -10,7 +12,7 @@ public class LoginPage extends BasePage{
     private final By LBL_ERROR_MSG = By.id("name");
     private final By ICON_USERNAME_ERROR = By.cssSelector("#userName-wrapper .is-invalid");
     private final By ICON_PASSWORD_ERROR = By.cssSelector("#password-wrapper .is-invalid");
-
+    private final By NOF_LOADING = By.xpath("//div[@id='NotiflixLoadingWrap']/div");
 
     /** -------------------- Page Methods ---------------------*/
     public void inputUserName(String username) {
@@ -22,19 +24,33 @@ public class LoginPage extends BasePage{
     }
 
     public void clickLoginBtn() {
-        clickElement(BTN_LOGIN);
+        try {
+            clickElement(BTN_LOGIN);
+        }
+        catch(TimeoutException e) {
+            clickElement(BTN_LOGIN);
+        }
     }
 
-    public void loginWithAdminAccount() {
+    public void loginWithDefaultAccount() {
+        waitForStalenessOfElementLocated(waitForVisibilityOfElementLocated(NOF_LOADING));
         inputUserName(System.getProperty("USERNAME"));
         inputPassword(System.getProperty("PASSWORD"));
         clickLoginBtn();
     }
 
     public void login(String username, String password) {
-        inputUserName(username);
-        inputPassword(password);
-        clickLoginBtn();
+        try {
+            waitForStalenessOfElementLocated(findElement(NOF_LOADING));
+            inputUserName(username);
+            inputPassword(password);
+            clickLoginBtn();
+        }
+        catch(NoSuchElementException e) {
+            inputUserName(username);
+            inputPassword(password);
+            clickLoginBtn();
+        }
     }
 
     public String getErrorMessage() {

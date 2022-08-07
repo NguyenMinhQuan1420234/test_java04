@@ -1,10 +1,10 @@
 package com.nashtech.assetmanagement.pages;
 
+import com.nashtech.assetmanagement.pages.shared.ModalHandle;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
 
 public class HomePage extends BasePage{
-
     /** ------------------ Web Elements ----------------------*/
 
     /**-------Head Bar-------*/
@@ -90,14 +90,7 @@ public class HomePage extends BasePage{
         return getText(MSG_OLDPASSWORD);
     }
 
-    public String randomPasword() {
-        int length = 10;
-        boolean useLetters = true;
-        boolean useNumbers = false;
-        return RandomStringUtils.random(length, useLetters, useNumbers);
-    }
-
-    public boolean getModalChangePasswordClosedStatus(){
+    public boolean isPopupClosed(){
         return !(isElementDisplayed(MODAL_CHANGEPASSWORD));
     }
 }

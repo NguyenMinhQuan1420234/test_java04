@@ -64,6 +64,20 @@
     "username": "stafft",
     "oldPassword": "123456",
     "newPassword": "BitCoin"
-  }
-
+  },
+  "AdminByLocation":
+    [
+      {
+        "username": "adminHCM",
+        "password": "123456"
+      },
+      {
+        "username": "adminDN",
+        "password": "123"
+      },
+      {
+        "username": "adminHN",
+        "password": "123456"
+      }
+    ]
 }

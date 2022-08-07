@@ -27,14 +27,15 @@ public class CreateUserTest extends BaseTest {
         manageUserPage = new ManageUserPage();
         detailInformationPage = new DetailedInformationPage();
         alertHandle = new ModalHandle();
-        loginPage.loginWithAdminAccount();
-        alertHandle.closePopup();
+        loginPage.loginWithDefaultAccount();
+        alertHandle.closeAlert();
     }
 
     @Test(dataProvider = "createUserWithAdminAccount", dataProviderClass = DataProviderUser.class)
     public void createUserSuccessfully(JsonObject user) {
-
+        alertHandle.closeAlert();
         homePage.moveToPage("Manage User");
+        alertHandle.closeAlert();
         manageUserPage.clickCreateNewUserButton();
         createUserPage.inputFirstname(user.get("firstName").getAsString());
         createUserPage.inputLastname(user.get("lastName").getAsString());
@@ -50,7 +51,7 @@ public class CreateUserTest extends BaseTest {
                 equalTo("Successfully added!!")
         );
 
-        alertHandle.closePopup();
+        alertHandle.closeAlert();
     }
 
     @Test(dataProvider = "createUserAccount", dataProviderClass = DataProviderUser.class)

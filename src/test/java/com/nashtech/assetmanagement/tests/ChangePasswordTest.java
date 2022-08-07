@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import com.nashtech.assetmanagement.dataProvider.DataProviderUser;
 import com.nashtech.assetmanagement.pages.*;
 import com.nashtech.assetmanagement.pages.shared.ModalHandle;
+import com.nashtech.assetmanagement.utils.RandomStringUtil;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -31,23 +32,26 @@ public class ChangePasswordTest extends BaseTest {
 
     @Test(dataProvider = "changePasswordAccountFirstLogin", dataProviderClass = DataProviderUser.class)
     public void changePasswordFirstLoginSuccessfully(JsonObject user) throws InterruptedException {
-        loginPage.loginWithAdminAccount();
+        loginPage.loginWithDefaultAccount();
+        alertHandle.closeAlert();
         homePage.moveToPage("Manage User");
         manageUserPage.clickCreateNewUserButton();
+        alertHandle.closeAlert();
         createUserPage.createUser(user);
         manageUserPage.clickDetailFirstUser();
         detailInformationPage.clickClose(detailInformationPage.getUserDetail("Staff Code"));
         String username = detailInformationPage.getUserDetail("Username");
         String accountPassword = username + user.get("password").getAsString();
+        alertHandle.closeAlert();
         homePage.logout();
-        alertHandle.closePopup();
+        alertHandle.closeAlert();
         loginPage.login(username, accountPassword);
-        alertHandle.closePopup();
+        alertHandle.closeAlert();
         homePage.changePasswordFirstLogin(user.get("newPassword").getAsString());
         alertHandle.waitForAlertMessageDisappear();
-        alertHandle.closePopup();
+        alertHandle.closeAlert();
         homePage.logout();
-        alertHandle.closePopup();
+        alertHandle.closeAlert();
         loginPage.login(username, user.get("newPassword").getAsString());
 
         assertThat("verify message login success by new password: ",
@@ -55,13 +59,13 @@ public class ChangePasswordTest extends BaseTest {
                 equalTo("Login success!!!")
         );
 
-        alertHandle.closePopup();
+        alertHandle.closeAlert();
     }
 
     @Test(dataProvider = "changePasswordAccount", dataProviderClass = DataProviderUser.class)
     public void changePasswordSuccessfully(JsonObject user){
         loginPage.login(user.get("username").getAsString(), user.get("oldPassword").getAsString());
-        alertHandle.closePopup();
+        alertHandle.waitForAlertMessageDisappear();
         homePage.changePassword(user.get("oldPassword").getAsString(),user.get("newPassword").getAsString());
 
         assertThat(
@@ -72,17 +76,17 @@ public class ChangePasswordTest extends BaseTest {
 
         homePage.closeMsg();
         homePage.logout();
-        alertHandle.closePopup();
+        alertHandle.closeAlert();
         loginPage.login(user.get("username").getAsString(), user.get("newPassword").getAsString());
-        alertHandle.closePopup();
+        alertHandle.waitForAlertMessageDisappear();
         homePage.changePassword(user.get("newPassword").getAsString(),user.get("oldPassword").getAsString());
     }
 
     @Test
-    public void changePasswordUnsuccessfullyOldPassMatchNewPass() {
-        loginPage.loginWithAdminAccount();
-        alertHandle.closePopup();
-        homePage.changePassword(homePage.randomPasword(), System.getProperty("USERNAME"));
+    public void changePasswordUnsuccessfullyOldPassNotMatch() {
+        loginPage.loginWithDefaultAccount();
+        alertHandle.waitForAlertMessageDisappear();
+        homePage.changePassword(RandomStringUtil.randomPasword(), System.getProperty("USERNAME"));
 
         assertThat(
                 "verify wrong old password ",
@@ -93,14 +97,14 @@ public class ChangePasswordTest extends BaseTest {
 
     @Test
     public void changePasswordCancel() {
-        loginPage.loginWithAdminAccount();
-        alertHandle.closePopup();
+        loginPage.loginWithDefaultAccount();
+        alertHandle.waitForAlertMessageDisappear();
         homePage.openChangePassword();
         homePage.clickCancelChangePassword();
 
         assertThat(
                 "verify modal changepassword has been closed: ",
-                homePage.getModalChangePasswordClosedStatus(),
+                homePage.isPopupClosed(),
                 equalTo(true)
         );
     }

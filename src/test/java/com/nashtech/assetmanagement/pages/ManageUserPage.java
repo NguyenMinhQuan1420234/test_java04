@@ -1,6 +1,8 @@
 package com.nashtech.assetmanagement.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 
 public class ManageUserPage extends BasePage{
     /** ------------------ Web Elements ----------------------*/
@@ -14,8 +16,13 @@ public class ManageUserPage extends BasePage{
 
     /** -------------------- Page Methods ---------------------*/
     public void clickCreateNewUserButton() {
-        waitForStalenessOfElementLocated(findElement(NOF_LOADING));
-        clickElement(BTN_CREATE_NEW_USER);
+        try {
+            waitForStalenessOfElementLocated(findElement(NOF_LOADING));
+            clickElement(BTN_CREATE_NEW_USER);
+        }
+        catch (NoSuchElementException e) {
+            clickElement(BTN_CREATE_NEW_USER);
+        }
     }
 
     public void clickDetailFirstUser() {
