@@ -25,11 +25,12 @@ public class VerifyAdminSortCriteriaTest extends BaseTest {
     }
 
     @Test
-    public void verifyAdminSearchCriteria() {
+    public void verifyAdminSearchByHeaderCriteria() throws InterruptedException {
         alertHandle.closeAlert();
         homePage.moveToPage("Manage User");
         homePage.waitLoadingScreen();
-        manageUserPage.sortByHeader("Staff Code", "descending");
+
+        manageUserPage.verifySortByHeader("Staff Code", "ascending");
 
     }
     @Test

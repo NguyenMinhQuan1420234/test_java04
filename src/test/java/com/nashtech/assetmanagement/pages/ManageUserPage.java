@@ -3,9 +3,11 @@ package com.nashtech.assetmanagement.pages;
 import com.nashtech.assetmanagement.utils.Pair;
 import org.openqa.selenium.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static java.lang.Integer.parseInt;
+import static java.lang.Thread.sleep;
 
 public class ManageUserPage extends BasePage{
     /** ------------------ Web Elements ----------------------*/
@@ -51,13 +53,14 @@ public class ManageUserPage extends BasePage{
 
     }
     //Header = {"Staff Code", "Full Name", "Joined Date", "Type"} - sortType = {"ascending", "descending"}
-    public void clickSortButton(String Header, String sortType) {
-        if(sortType.equals("ascending"))
-            findElement(getByLocator(BTN_HEADER_SORT, Header)).click();
-        else if (sortType.equals("descending")) {
-            findElement(getByLocator(BTN_HEADER_SORT, Header)).click();
-            findElement(getByLocator(BTN_HEADER_SORT, Header)).click();
+    public void clickSortButton(String Header, String sortType) throws InterruptedException {
+        if(sortType.equals("descending"))
+            waitForElementToBeClickable(getByLocator(BTN_HEADER_SORT, Header)).click();
+        else if (sortType.equals("ascending")) {
+            waitForElementToBeClickable(getByLocator(BTN_HEADER_SORT, Header)).click();
+            waitForElementToBeClickable(getByLocator(BTN_HEADER_SORT, Header)).click();
         }
+        sleep(2000);
     }
     public int getTotalPage() {
         try {
@@ -69,24 +72,39 @@ public class ManageUserPage extends BasePage{
             return totalPage;
         }
     }
-    public void sortByHeader(String sortHeader, String sortType) {
-        clickSortButton(sortHeader, sortType);
+    public boolean verifySortOrder(ArrayList<String> list) {
+        for(int i = 0; i < list.size(); i++) {
+            if(list.get(i+1).compareTo(list.get(i)) < 0)
+                return false;
+            }
+        return true;
+    }
+    public boolean verifySortByHeader(String sortHeader, String sortType) throws InterruptedException {
+        clickSortButton("Staff Code", "ascending");
         int totalPage = getTotalPage();
+        ArrayList<String> listOfSortValue = new ArrayList<>();
+        boolean flag = false;
         switch (sortHeader) {
             case "Staff Code":
                 for (int page = 1; page <= totalPage; page++) {
+                    isElementDisplayed(getByLocator(LBL_DATA_LIST, sortHeader, "1"));
                     waitForVisibilityOfElementLocated(getByLocator(LBL_DATA_LIST, sortHeader, "1"));
                     List<WebElement> dataList = waitForVisibilityOfAllElementsLocatedBy(getByLocator(LBL_DATA_LIST, sortHeader,"1"));
-                    for(WebElement data: dataList)
+                    listOfSortValue.clear();
+                    for(WebElement data: dataList) {
                         System.out.println(data.getText());
+                        listOfSortValue.add(data.getText());
+                    }
+                    flag = verifySortOrder(listOfSortValue);
+                    System.out.println(flag);
                     try {
                         clickElement(BTN_NEXT_PAGE);
                     }
                     catch(ElementClickInterceptedException e) {
                         clickElement(BTN_NEXT_PAGE);
                     }
-
                 }
+                System.out.println(listOfSortValue);
                 break;
             case "Full Name":
 
@@ -101,8 +119,7 @@ public class ManageUserPage extends BasePage{
 
                  break;
         }
-//        List<WebElement> dataList = waitForVisibilityOfAllElementsLocatedBy(getByLocator(LBL_TABLE_DATA_LIST, sortHeader));
-
-
+        return flag;
     }
+
 }
