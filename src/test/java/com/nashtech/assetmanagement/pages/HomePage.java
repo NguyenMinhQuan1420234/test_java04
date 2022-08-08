@@ -29,6 +29,8 @@ public class HomePage extends BasePage{
     public static final By LBL_CHANGEPASSWORD_SUCCESSFULLY = By.xpath("//div[@id='modalSuccess']//p");
     public static final By BTN_CLOSE_FORM = By.xpath("//button[text()='Close']");
     public static final By MSG_OLDPASSWORD = By.cssSelector("#old-pass~p");
+    public static final By NOF_LOADING = By.xpath("//div[@id='NotiflixLoadingWrap']/div");
+
 
     /**-------Side Bar-------*/
 
@@ -92,5 +94,8 @@ public class HomePage extends BasePage{
 
     public boolean isPopupClosed(){
         return !(isElementDisplayed(MODAL_CHANGEPASSWORD));
+    }
+    public void waitLoadingScreen() {
+        waitForStalenessOfElementLocated(findElement(NOF_LOADING));
     }
 }

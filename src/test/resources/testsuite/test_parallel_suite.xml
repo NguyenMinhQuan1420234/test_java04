@@ -6,6 +6,11 @@
             <class name="com.nashtech.assetmanagement.tests.CreateUserTest" />
         </classes>
     </test>
+    <test name="ChangePasswordTest">
+        <classes>
+            <class name="com.nashtech.assetmanagement.tests.ChangePasswordTest" />
+        </classes>
+    </test>
     <test name="LoginTest">
         <classes>
             <class name="com.nashtech.assetmanagement.tests.LoginTest" />

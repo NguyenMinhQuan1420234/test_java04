@@ -7,6 +7,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
+
+import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
@@ -26,6 +29,7 @@ public class BaseTest {
     private static final Logger LOGGER = LogManager.getLogger(BaseTest.class);
     private static final LocalDateTime START_TIME = LocalDateTime.now();
 
+
     @BeforeSuite
     public void beforeSuite() throws IOException {
         Properties properties = PropertiesFileUtil.loadPropertiesFromFile(System.getProperty("env.properties"));
@@ -34,7 +38,7 @@ public class BaseTest {
 
     @BeforeMethod
     @Parameters({"browser"})
-    public void beforeMethod(@Optional("") String browser) throws MalformedURLException {
+    public void beforeMethod(@Optional("") String browser) throws MalformedURLException, AWTException {
         String browserType = (browser!=null && !browser.isEmpty())? browser:System.getProperty("BROWSER_TYPE");
         Browser.initBrowser(System.getProperty("DRIVER_MODE"), browserType);
         BasePage.goToUrl(System.getProperty("BASE_URL"));

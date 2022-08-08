@@ -59,7 +59,6 @@ public class ChangePasswordTest extends BaseTest {
                 equalTo("Login success!!!")
         );
 
-        alertHandle.closeAlert();
     }
 
     @Test(dataProvider = "changePasswordAccount", dataProviderClass = DataProviderUser.class)

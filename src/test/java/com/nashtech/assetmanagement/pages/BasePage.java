@@ -219,6 +219,12 @@ public class BasePage {
         Select elementSelect = new Select(waitForElementToBeClickable(locator));
         elementSelect.selectByVisibleText(value);
     }
+    public void clickAtElementByLocation(By locator, int x, int y) {
+        WebElement element = waitForElementToBeClickable(locator);
+        Actions actionChains = new Actions(Browser.getDriver());
+        actionChains.moveToElement(element, x, y);
+        actionChains.click(element).build().perform();
+    }
 }
 
 
