@@ -14,6 +14,10 @@ import static java.lang.Thread.sleep;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
+
 public class ManageUserPage extends BasePage{
     /** ------------------ Web Elements ----------------------*/
     private final By BTN_CREATE_NEW_USER = By.xpath("//button[text()='Create new user']");
@@ -185,7 +189,7 @@ public class ManageUserPage extends BasePage{
                 }
                 System.out.println(listOfSortValue);
                 break;
-            case default:
+            default:
                 for (int page = 1; page <= totalPage; page++) {
                     isElementDisplayed(getByLocator(LBL_DATA_LIST, sortHeader, index));
                     waitForVisibilityOfElementLocated(getByLocator(LBL_DATA_LIST, sortHeader, index));

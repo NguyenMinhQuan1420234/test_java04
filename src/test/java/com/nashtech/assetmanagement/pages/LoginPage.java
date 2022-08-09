@@ -4,6 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 
+
+
 public class LoginPage extends BasePage{
     /** ------------------ Web Elements ----------------------*/
     private final By TXT_USERNAME = By.id("username");
@@ -13,6 +15,13 @@ public class LoginPage extends BasePage{
     private final By ICON_USERNAME_ERROR = By.cssSelector("#userName-wrapper .is-invalid");
     private final By ICON_PASSWORD_ERROR = By.cssSelector("#password-wrapper .is-invalid");
     private final By NOF_LOADING = By.xpath("//div[@id='NotiflixLoadingWrap']/div");
+    private final By LBL_LoginErrorMessage = By.xpath("//div[@class='Toastify']/div/div[1]/div/div[2]");
+    private final By LBL_LoginSuccessMessage = By.xpath("//div[@class='Toastify']/div/div[1]/div/div[2]");
+    private final By BTN_DisabledLogin= By.xpath("//button[@type='submit']");
+    private final By BTN_LogoutAccepted= By.xpath("//button[@id='btnLogout']");
+    private final By BTN_Profile= By.xpath("//button[@id='dropdownMenuReference']//span");
+    private final By BTN_Logout= By.xpath("//ul[@class='dropdown-menu show']//li[1]");
+    private final By BTN_LogoutCancel= By.id("btnCancel");
 
     /** -------------------- Page Methods ---------------------*/
     public void inputUserName(String username) {
@@ -52,9 +61,11 @@ public class LoginPage extends BasePage{
             clickLoginBtn();
         }
     }
-
-    public String getErrorMessage() {
-        return getText(LBL_ERROR_MSG);
+    public void logout() {
+        clickElement(BTN_Profile);
+        clickElement(BTN_Logout);
+        clickElement(BTN_LogoutAccepted);
+        waitForStalenessOfElementLocated(waitForVisibilityOfElementLocated(NOF_LOADING));
     }
 
     public boolean isErrorIconDisplayedInUsername() {
@@ -64,4 +75,20 @@ public class LoginPage extends BasePage{
     public boolean isErrorIconDisplayedInPassword() {
         return isElementDisplayed(ICON_PASSWORD_ERROR);
     }
+    public void clickLogoutCancelBtn () {
+        clickElement(BTN_LogoutCancel);
+    }
+    public String getErrorMessage() {
+        return getText(LBL_LoginErrorMessage);
+    }
+
+    public String getLoginMessage() {return getText(LBL_LoginSuccessMessage);}
+
+
+    public Boolean getLoginBtnDisabled() {
+        return Boolean.parseBoolean(getAttribute(BTN_DisabledLogin));
+    }
+
 }
+
+

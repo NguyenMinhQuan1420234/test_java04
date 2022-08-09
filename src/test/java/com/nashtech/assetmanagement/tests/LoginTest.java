@@ -4,6 +4,7 @@ import com.nashtech.assetmanagement.constants.UrlConstants;
 import com.nashtech.assetmanagement.pages.BasePage;
 import com.nashtech.assetmanagement.pages.HomePage;
 import com.nashtech.assetmanagement.pages.LoginPage;
+import com.nashtech.assetmanagement.pages.shared.ModalHandle;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.annotations.BeforeMethod;
@@ -15,6 +16,7 @@ import static org.hamcrest.Matchers.equalTo;
 public class LoginTest extends BaseTest{
     LoginPage loginPage;
     HomePage homePage;
+    ModalHandle modalHandle;
     String username, password;
 
     private static final Logger LOGGER = LogManager.getLogger(LoginTest.class);
@@ -23,7 +25,7 @@ public class LoginTest extends BaseTest{
     public void beforeMethod (){
         loginPage = new LoginPage();
         homePage = new HomePage();
-        BasePage.navigate(UrlConstants.LOGIN_PAGE);
+        modalHandle = new ModalHandle();
         username= System.getProperty("USERNAME");
         password= System.getProperty("PASSWORD");
     }
@@ -35,23 +37,22 @@ public class LoginTest extends BaseTest{
         loginPage.clickLoginBtn();
         String actualUsername = homePage.getUserName();
         assertThat("Verify username", actualUsername, equalTo("adminHCM"));
-
     }
     @Test
     public void loginUnsuccessfullyWithEmptyUsername(){
         LOGGER.info("loginUnsuccessfullyWithEmptyUsername");
         loginPage.inputPassword(password);
         loginPage.clickLoginBtn();
-        boolean isErrorIconShown = loginPage.isErrorIconDisplayedInUsername();
-        assertThat("Verify username", isErrorIconShown, equalTo(Boolean.TRUE));
+        boolean disabledBtn = loginPage.getLoginBtnDisabled();
+        assertThat("Verify disabled",disabledBtn , equalTo(Boolean.TRUE));
     }
     @Test
     public void loginUnsuccessfullyWithEmptyPassword(){
         LOGGER.info("loginUnsuccessfullyWithEmptyPassword");
         loginPage.inputUserName(username);
         loginPage.clickLoginBtn();
-        boolean isErrorIconDisplayedInPassword = loginPage.isErrorIconDisplayedInPassword();
-        assertThat("Verify username", isErrorIconDisplayedInPassword, equalTo(Boolean.TRUE));
+        boolean LoginMsg = loginPage.getLoginBtnDisabled();
+        assertThat("Verify username", LoginMsg, equalTo(Boolean.TRUE));
     }
     @Test
     public void loginUnsuccessfullyWithInvalidUsername(){
@@ -60,7 +61,7 @@ public class LoginTest extends BaseTest{
         loginPage.inputPassword(password);
         loginPage.clickLoginBtn();
         String errorMsg = loginPage.getErrorMessage();
-        assertThat("Verify error message", errorMsg, equalTo("Invalid username or password!"));
+        assertThat("Verify error message", errorMsg, equalTo("Username or Password Invalid"));
     }
     @Test
     public void loginUnsuccessfullyWithInvalidPassword(){
@@ -69,6 +70,6 @@ public class LoginTest extends BaseTest{
         loginPage.inputPassword("Password");
         loginPage.clickLoginBtn();
         String errorMsg = loginPage.getErrorMessage();
-        assertThat("Verify error message", errorMsg, equalTo("Invalid username or password!"));
+        assertThat("Verify error message", errorMsg, equalTo("Username or Password Invalid"));
     }
 }

@@ -31,7 +31,6 @@ public class HomePage extends BasePage{
     public static final By MSG_OLDPASSWORD = By.cssSelector("#old-pass~p");
     public static final By NOF_LOADING = By.xpath("//div[@id='NotiflixLoadingWrap']/div");
 
-
     /**-------Side Bar-------*/
 
     public static final By LNK_MENU_HOME = By.xpath("//a[contains(text(),'Home')]");

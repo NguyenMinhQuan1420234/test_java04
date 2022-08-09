@@ -187,6 +187,10 @@ public class BasePage {
         WebElement element = waitForVisibilityOfElementLocated(locator);
         return element.getText();
     }
+    public static String getAttribute(By locator) {
+        WebElement element = waitForVisibilityOfElementLocated(locator);
+        return element.getAttribute("disabled");
+    }
 
     public static ArrayList<String> getTextOfElements(By locator, Boolean moveToElement) {
         List<WebElement> elements = findElements(locator);

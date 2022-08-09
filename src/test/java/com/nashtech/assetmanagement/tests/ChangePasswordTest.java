@@ -36,12 +36,14 @@ public class ChangePasswordTest extends BaseTest {
         alertHandle.closeAlert();
         homePage.moveToPage("Manage User");
         manageUserPage.clickCreateNewUserButton();
+        alertHandle.closeAlert();
         createUserPage.createUser(user);
         alertHandle.waitForAlertMessageDisappear();
         manageUserPage.clickDetailFirstUser();
         detailInformationPage.clickClose(detailInformationPage.getUserDetail("Staff Code"));
         String username = detailInformationPage.getUserDetail("Username");
         String accountPassword = username + user.get("password").getAsString();
+        alertHandle.closeAlert();
         homePage.logout();
         alertHandle.closeAlert();
         loginPage.login(username, accountPassword);
