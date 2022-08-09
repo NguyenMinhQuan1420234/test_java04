@@ -5,6 +5,8 @@ import com.nashtech.assetmanagement.pages.shared.ModalHandle;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.text.ParseException;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
@@ -23,15 +25,44 @@ public class VerifyAdminSortCriteriaTest extends BaseTest {
         alertHandle = new ModalHandle();
         loginPage.loginWithDefaultAccount();
     }
-
+    //Header = {"Staff Code", "Full Name", "Joined Date", "Type"} - sortType = {"ascending", "descending"}
     @Test
-    public void verifyAdminSearchByHeaderCriteria() throws InterruptedException {
+    public void verifyAdminSearchByHeaderCriteria() throws InterruptedException, ParseException {
         alertHandle.closeAlert();
         homePage.moveToPage("Manage User");
         homePage.waitLoadingScreen();
-
-        manageUserPage.verifySortByHeader("Staff Code", "ascending");
-
+        manageUserPage.clickSortButton("Joined Date", "descending");
+        assertThat(
+                "Verify sort order: ",
+                manageUserPage.verifySortByHeader("Joined Date", "descending"),
+                equalTo(true)
+        );
+    }
+    //Filter = {"All", "Admin", "Staff"}
+    @Test
+    public void verifyAdminSearchByFilterCriteria() throws InterruptedException {
+        alertHandle.closeAlert();
+        homePage.moveToPage("Manage User");
+        homePage.waitLoadingScreen();
+        manageUserPage.clickSortButton("Joined Date", "descending");
+        assertThat(
+                "Verify sort order: ",
+                manageUserPage.verifySortByFilter("Staff"),
+                equalTo(true)
+        );
+    }
+    @Test
+    public void verifyAdminSearchBySearchBarCriteria() throws InterruptedException {
+        alertHandle.closeAlert();
+        homePage.moveToPage("Manage User");
+        homePage.waitLoadingScreen();
+        manageUserPage.inputSearchCriteria("SD00");
+        manageUserPage.clickSearchButton();
+        assertThat(
+                "Verify sort order: ",
+                manageUserPage.verifySearchCriteria("SD00","Staff Code"),
+                equalTo(true)
+        );
     }
     @Test
     public void verifyAdminCanSeeUserDetailInformationSuccessfully() {

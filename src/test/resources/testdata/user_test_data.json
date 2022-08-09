@@ -55,15 +55,15 @@
   },
   "Admin":
     {
-      "username": "admint",
+      "username": "adminHCM",
       "oldPassword": "123456",
-      "newPassword": "monaLisa"
+      "newPassword": "123456"
     },
   "Staff":
   {
-    "username": "stafft",
+    "username": "adminHN",
     "oldPassword": "123456",
-    "newPassword": "BitCoin"
+    "newPassword": "123456"
   },
   "AdminByLocation":
     [

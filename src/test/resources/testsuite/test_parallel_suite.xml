@@ -11,6 +11,11 @@
             <class name="com.nashtech.assetmanagement.tests.ChangePasswordTest" />
         </classes>
     </test>
+    <test name="VerifyAdminSortCriteriaTest">
+        <classes>
+            <class name="com.nashtech.assetmanagement.tests.VerifyAdminSortCriteriaTest" />
+        </classes>
+    </test>
     <test name="LoginTest">
         <classes>
             <class name="com.nashtech.assetmanagement.tests.LoginTest" />
