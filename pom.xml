@@ -24,6 +24,7 @@
         <extentreports-testng-adapter.version>1.2.2</extentreports-testng-adapter.version>
         <slf4j.version>1.7.32</slf4j.version>
         <lombok.version>1.18.22</lombok.version>
+        <rest-assured.version>4.5.1</rest-assured.version>
     </properties>
 
     <profiles>
@@ -69,15 +70,6 @@
                             src/test/resources/testsuite/test_parallel_suite.xml
                         </suiteXmlFile>
                     </suiteXmlFiles>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>18</source>
-                    <target>18</target>
-                    <compilerArgs>--enable-preview</compilerArgs>
                 </configuration>
             </plugin>
         </plugins>
@@ -145,7 +137,7 @@
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
-            <version>4.5.1</version>
+            <version>${rest-assured.version}</version>
         </dependency>
 
     </dependencies>
