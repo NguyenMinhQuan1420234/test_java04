@@ -35,7 +35,6 @@ public class CreateUserTest extends BaseTest {
     public void createUserSuccessfully(JsonObject user) {
         alertHandle.waitForAlertMessageDisappear();
         homePage.moveToPage("Manage User");
-        alertHandle.closeAlert();
         manageUserPage.clickCreateNewUserButton();
         createUserPage.inputFirstname(user.get("firstName").getAsString());
         createUserPage.inputLastname(user.get("lastName").getAsString());

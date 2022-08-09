@@ -36,14 +36,12 @@ public class ChangePasswordTest extends BaseTest {
         alertHandle.closeAlert();
         homePage.moveToPage("Manage User");
         manageUserPage.clickCreateNewUserButton();
-        alertHandle.closeAlert();
         createUserPage.createUser(user);
         alertHandle.waitForAlertMessageDisappear();
         manageUserPage.clickDetailFirstUser();
         detailInformationPage.clickClose(detailInformationPage.getUserDetail("Staff Code"));
         String username = detailInformationPage.getUserDetail("Username");
         String accountPassword = username + user.get("password").getAsString();
-        alertHandle.closeAlert();
         homePage.logout();
         alertHandle.closeAlert();
         loginPage.login(username, accountPassword);
@@ -52,7 +50,7 @@ public class ChangePasswordTest extends BaseTest {
         alertHandle.waitForAlertMessageDisappear();
         alertHandle.closeAlert();
         homePage.logout();
-        alertHandle.closeAlert();
+        alertHandle.waitForAlertMessageDisappear();
         loginPage.login(username, user.get("newPassword").getAsString());
 
         assertThat("verify message login success by new password: ",
@@ -78,7 +76,7 @@ public class ChangePasswordTest extends BaseTest {
         homePage.logout();
         alertHandle.closeAlert();
         loginPage.login(user.get("username").getAsString(), user.get("newPassword").getAsString());
-        alertHandle.waitForAlertMessageDisappear();
+        alertHandle.closeAlert();
         homePage.changePassword(user.get("newPassword").getAsString(),user.get("oldPassword").getAsString());
     }
 
