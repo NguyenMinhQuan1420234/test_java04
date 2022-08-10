@@ -30,7 +30,7 @@ public class VerifyAdminSortCriteriaTest extends BaseTest {
     public void verifyAdminSearchByHeaderCriteria() throws InterruptedException, ParseException {
         alertHandle.closeAlert();
         homePage.moveToPage("Manage User");
-        homePage.waitLoadingScreen();
+//        homePage.waitLoadingScreen();
         manageUserPage.clickSortButton("Joined Date", "descending");
         assertThat(
                 "Verify sort order: ",
@@ -43,7 +43,7 @@ public class VerifyAdminSortCriteriaTest extends BaseTest {
     public void verifyAdminSearchByFilterCriteria() throws InterruptedException {
         alertHandle.closeAlert();
         homePage.moveToPage("Manage User");
-        homePage.waitLoadingScreen();
+//        homePage.waitLoadingScreen();
         manageUserPage.clickSortButton("Joined Date", "descending");
         assertThat(
                 "Verify sort order: ",
@@ -55,7 +55,7 @@ public class VerifyAdminSortCriteriaTest extends BaseTest {
     public void verifyAdminSearchBySearchBarCriteria() throws InterruptedException {
         alertHandle.closeAlert();
         homePage.moveToPage("Manage User");
-        homePage.waitLoadingScreen();
+//        homePage.waitLoadingScreen();
         manageUserPage.inputSearchCriteria("SD00");
         manageUserPage.clickSearchButton();
         assertThat(

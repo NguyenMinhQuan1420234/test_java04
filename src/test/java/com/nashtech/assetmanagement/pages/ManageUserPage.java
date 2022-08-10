@@ -56,7 +56,7 @@ public class ManageUserPage extends BasePage{
     }
     /** -------------------- Search User In Page Methods ---------------------*/
     public void clickDetailRandomUser() {
-        waitForStalenessOfElementLocated(findElement(NOF_LOADING));
+//        waitForStalenessOfElementLocated(findElement(NOF_LOADING));
         String number = Integer.toString((int)(Math.random()*5 + 1));
         clickElement(By.xpath(String.format(RANDOM_USER, number)), true);
     }
