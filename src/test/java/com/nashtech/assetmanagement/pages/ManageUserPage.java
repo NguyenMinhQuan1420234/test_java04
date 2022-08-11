@@ -212,10 +212,31 @@ public class ManageUserPage extends BasePage{
             }
         return flag;
     }
+    public void clickFilterType(String filterType) {
+        List<WebElement> staffCodeList1 = waitForVisibilityOfAllElementsLocatedBy(getByLocator(LBL_DATA_LIST,"Staff Code","1"));
+        ArrayList<String> staffCodeData1 = new ArrayList<>();
+        ArrayList<String> staffCodeData2 = new ArrayList<>();
+        for (WebElement staffCode: staffCodeList1) {
+            staffCodeData1.add(staffCode.getText());
+        }
 
-    public boolean verifySortByFilter(String sortType) {
         clickElement(DDL_FILTER);
-        clickElement(getByLocator(CHK_FILTER_TYPE,sortType));
+        clickElement(getByLocator(CHK_FILTER_TYPE,filterType));
+
+        List<WebElement> staffCodeList2;
+        boolean flag = true;
+        while(flag) {
+            staffCodeList2 = waitForVisibilityOfAllElementsLocatedBy(getByLocator(LBL_DATA_LIST, "Staff Code", "1"));
+            for (WebElement staffCode: staffCodeList2) {
+                staffCodeData2.add(staffCode.getText());
+            }
+            if(!(staffCodeData1.equals(staffCodeData2))) {
+                flag = false;
+            }
+        }
+    }
+
+    public boolean verifySortByFilter(String filterType) {
         int totalPage = getTotalPage();
         ArrayList<String> listOfSortValue = new ArrayList<>();
         boolean flag = false;
@@ -227,7 +248,7 @@ public class ManageUserPage extends BasePage{
                 System.out.println(data.getText());
                 listOfSortValue.add(data.getText());
             }
-            flag = verifySortOrderByString(listOfSortValue, sortType);
+            flag = verifySortOrderByString(listOfSortValue, filterType);
             System.out.println(flag);
             if (totalPage > 1 && page < totalPage) {
                 try {

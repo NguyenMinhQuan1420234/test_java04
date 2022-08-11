@@ -33,9 +33,8 @@ public class CreateUserTest extends BaseTest {
 
     @Test(dataProvider = "createUserWithAdminAccount", dataProviderClass = DataProviderUser.class)
     public void createUserSuccessfully(JsonObject user) {
-        alertHandle.waitForAlertMessageDisappear();
         homePage.moveToPage("Manage User");
-        alertHandle.closeAlert();
+        homePage.waitLoadingScreen();
         manageUserPage.clickCreateNewUserButton();
         createUserPage.inputFirstname(user.get("firstName").getAsString());
         createUserPage.inputLastname(user.get("lastName").getAsString());
@@ -56,8 +55,8 @@ public class CreateUserTest extends BaseTest {
 
     @Test(dataProvider = "createUserAccount", dataProviderClass = DataProviderUser.class)
     public void verifyNewUserAddedToTopOfUserListSuccessfully(JsonObject user) {
-        alertHandle.waitForAlertMessageDisappear();
         homePage.moveToPage("Manage User");
+        homePage.waitLoadingScreen();
         manageUserPage.clickCreateNewUserButton();
         createUserPage.inputFirstname(user.get("firstName").getAsString());
         createUserPage.inputLastname(user.get("lastName").getAsString());
@@ -99,8 +98,8 @@ public class CreateUserTest extends BaseTest {
 
     @Test(dataProvider = "createUserAccount", dataProviderClass = DataProviderUser.class)
     public void verifyClickCancelButtonBackToManageUserPage(JsonObject user) {
-        alertHandle.waitForAlertMessageDisappear();
         homePage.moveToPage("Manage User");
+        homePage.waitLoadingScreen();
         manageUserPage.clickCreateNewUserButton();
         createUserPage.inputFirstname(user.get("firstName").getAsString());
         createUserPage.inputLastname(user.get("lastName").getAsString());

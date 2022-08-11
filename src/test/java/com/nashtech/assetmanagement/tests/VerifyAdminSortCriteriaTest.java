@@ -44,7 +44,7 @@ public class VerifyAdminSortCriteriaTest extends BaseTest {
         alertHandle.closeAlert();
         homePage.moveToPage("Manage User");
         homePage.waitLoadingScreen();
-        manageUserPage.clickSortButton("Joined Date", "descending");
+        manageUserPage.clickFilterType("Staff");
         assertThat(
                 "Verify sort order: ",
                 manageUserPage.verifySortByFilter("Staff"),
