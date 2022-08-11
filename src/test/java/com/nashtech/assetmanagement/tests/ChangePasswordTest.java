@@ -76,7 +76,7 @@ public class ChangePasswordTest extends BaseTest {
         homePage.logout();
         alertHandle.closeAlert();
         loginPage.login(user.get("username").getAsString(), user.get("newPassword").getAsString());
-        alertHandle.waitForAlertMessageDisappear();
+        alertHandle.closeAlert();
         homePage.changePassword(user.get("newPassword").getAsString(),user.get("oldPassword").getAsString());
     }
 
