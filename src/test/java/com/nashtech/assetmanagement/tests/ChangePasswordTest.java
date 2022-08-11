@@ -20,7 +20,7 @@ public class ChangePasswordTest extends BaseTest {
     ModalHandle alertHandle;
 
     @BeforeMethod()
-    public void createNewUser() {
+    public void precondition() {
         loginPage = new LoginPage();
         manageUserPage = new ManageUserPage();
         createUserPage = new CreateUserPage();
@@ -63,7 +63,7 @@ public class ChangePasswordTest extends BaseTest {
     public void changePasswordSuccessfully(JsonObject user){
         homePage.waitLoadingScreen();
         loginPage.login(user.get("username").getAsString(), user.get("oldPassword").getAsString());
-        alertHandle.waitForAlertMessageDisappear();
+        alertHandle.closeAlert();
         homePage.changePassword(user.get("oldPassword").getAsString(),user.get("newPassword").getAsString());
 
         assertThat(

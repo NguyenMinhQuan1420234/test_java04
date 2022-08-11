@@ -113,7 +113,7 @@ public class BasePage {
         wait.until(ExpectedConditions.textToBePresentInElementLocated(locator, text));
     }
 
-    public static void waitFroTextBePresentInElementValue(By locator, String text) {
+    public static void waitForTextBePresentInElementValue(By locator, String text) {
         WebDriverWait wait = new WebDriverWait(Browser.getDriver(), Duration.ofSeconds(SELENIUM_TIMEOUT_SECONDS));
         wait.until(ExpectedConditions.textToBePresentInElementValue(locator, text));
     }

@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 <suite name="suite" parallel="tests" thread-count="2">
-<!--    <parameter name="browser" value="IE"/>-->
+    <parameter name="browser" value="IE"/>
     <test name="CreateUserTest">
         <classes>
             <class name="com.nashtech.assetmanagement.tests.CreateUserTest" />
@@ -19,6 +19,16 @@
     <test name="LoginTest">
         <classes>
             <class name="com.nashtech.assetmanagement.tests.LoginTest" />
+        </classes>
+    </test>
+    <test name="LogOutTest">
+        <classes>
+            <class name="com.nashtech.assetmanagement.tests.LogOutTest" />
+        </classes>
+    </test>
+    <test name="SearchTest">
+        <classes>
+            <class name="com.nashtech.assetmanagement.tests.SearchTest" />
         </classes>
     </test>
 </suite>

@@ -23,6 +23,7 @@ public class ManageUserPage extends BasePage{
     private final By BTN_CREATE_NEW_USER = By.xpath("//button[text()='Create new user']");
     private final By NOF_LOADING = By.xpath("//div[@id='NotiflixLoadingWrap']/div");
     private final By FIRST_USER = By.xpath("//tbody/tr[1]");
+    private final By FIRST_USER_STAFFCODE = By.xpath("//tbody/tr[1]/td[1]");
     private final String RANDOM_USER = "//tbody/tr[%s]";
     private final Pair<String, String> LBL_HEADER_TABLE = Pair.of("xpath", "//th[text()='%s']/button");
     private final Pair<String, String> LBL_DATA_LIST = Pair.of("xpath", "//div[@class='table-user-list']//th[text()='%s']/ancestor::thead/following-sibling::tbody//td[%s]");
@@ -35,6 +36,9 @@ public class ManageUserPage extends BasePage{
     private final By DDL_FILTER = By.id("dropMenuFilterType");
     private final By TXT_SEARCH_BAR = By.cssSelector("div.search input");
     private final By BTN_SEARCH = By.id("btnSearch");
+    private final Pair<String, String> BTN_EDIT_USER = Pair.of("xpath", "//tr/td[text()='%s']/following-sibling::td/button[@id='btnEdit']");
+    private final Pair<String, String> BTN_DISABLE_USER = Pair.of("xpath", "//tr/td[text()='%s']/following-sibling::td/button[@id='btnHighlight']");
+
     /** -------------------- Page Methods ---------------------*/
 
     public void clickCreateNewUserButton() {
@@ -293,4 +297,10 @@ public class ManageUserPage extends BasePage{
         }
         return true;
     }
+    /** -------------------- Disable User Methods ---------------------*/
+    public void clickCreatedUserToDisable() {
+
+    }
+
+
 }
