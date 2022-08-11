@@ -1,49 +1,46 @@
 {
-  "validUserData" :
-    [
-      {
-        "firstName": "quan",
-        "lastName": "nguyen",
-        "dateOfBirth": "05/09/1996",
-        "dateOfBirthDetailFormat": "09/05/1996",
-        "gender": "Male",
-        "joinDate": "01/07/2022",
-        "joinDateDetailFormat": "07/01/2022",
-        "type": "ADMIN"
-      },
-      {
-        "firstName": "Nam",
-        "lastName": "nguyen",
-        "dateOfBirth": "22/02/2000",
-        "dateOfBirthDetailFormat": "02/22/2000",
-        "gender": "Female",
-        "joinDate": "22/02/2022",
-        "joinDateDetailFormat": "02/22/1996",
-        "type": "STAFF"
-      }
-    ],
-  "invalidUserData":
-    [
-      {
-        "firstName": "quan2",
-        "lastName": "nguyen",
-        "dateOfBirth": "22/02/2000",
-        "dateOfBirthDetailFormat": "02/22/2000",
-        "gender": "Female",
-        "joinDate": "22/2/2010",
-        "type": "STAFF"
-      },
-      {
-        "firstName": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-        "lastName": "nguyen",
-        "dateOfBirth": "02/02/2000",
-        "gender": "Male",
-        "joinDate": "22/2/2021",
-        "type": "ADMIN"
-      }
-    ],
-  "changePassUserData":
-  {
+  "validUserData": [
+    {
+      "firstName": "quan",
+      "lastName": "nguyen",
+      "dateOfBirth": "05/09/1996",
+      "dateOfBirthDetailFormat": "09/05/1996",
+      "gender": "Male",
+      "joinDate": "01/07/2022",
+      "joinDateDetailFormat": "07/01/2022",
+      "type": "ADMIN"
+    },
+    {
+      "firstName": "Nam",
+      "lastName": "nguyen",
+      "dateOfBirth": "22/02/2000",
+      "dateOfBirthDetailFormat": "02/22/2000",
+      "gender": "Female",
+      "joinDate": "22/02/2022",
+      "joinDateDetailFormat": "02/22/1996",
+      "type": "STAFF"
+    }
+  ],
+  "invalidUserData": [
+    {
+      "firstName": "quan2",
+      "lastName": "nguyen",
+      "dateOfBirth": "22/02/2000",
+      "dateOfBirthDetailFormat": "02/22/2000",
+      "gender": "Female",
+      "joinDate": "22/2/2010",
+      "type": "STAFF"
+    },
+    {
+      "firstName": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "lastName": "nguyen",
+      "dateOfBirth": "02/02/2000",
+      "gender": "Male",
+      "joinDate": "22/2/2021",
+      "type": "ADMIN"
+    }
+  ],
+  "changePassUserData": {
     "firstName": "Goku",
     "lastName": "Son",
     "dateOfBirth": "17/05/1989",
@@ -53,31 +50,28 @@
     "password": "@17051989",
     "newPassword": "123456"
   },
-  "Admin":
-    {
-      "username": "adminHCM",
-      "oldPassword": "123456",
-      "newPassword": "123456"
-    },
-  "Staff":
-  {
+  "Admin": {
+    "username": "adminHCM",
+    "oldPassword": "123456",
+    "newPassword": "123456"
+  },
+  "Staff": {
     "username": "adminHN",
     "oldPassword": "123456",
     "newPassword": "123456"
   },
-  "AdminByLocation":
-    [
-      {
-        "username": "adminHCM",
-        "password": "123456"
-      },
-      {
-        "username": "adminDN",
-        "password": "123"
-      },
-      {
-        "username": "adminHN",
-        "password": "123456"
-      }
-    ]
+  "AdminByLocation": [
+    {
+      "username": "adminHCM",
+      "password": "123456"
+    },
+    {
+      "username": "adminDN",
+      "password": "123"
+    },
+    {
+      "username": "adminHN",
+      "password": "123456"
+    }
+  ]
 }

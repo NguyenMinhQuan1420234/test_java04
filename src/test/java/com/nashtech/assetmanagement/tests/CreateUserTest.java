@@ -46,7 +46,7 @@ public class CreateUserTest extends BaseTest {
 
         assertThat(
                 "verify create message: ",
-                alertHandle.getPopupMessageText(),
+                alertHandle.getAlertMessageText(),
                 equalTo("Successfully added!!")
         );
 

@@ -12,7 +12,6 @@ import java.util.List;
 import static java.lang.Integer.parseInt;
 import static java.lang.Thread.sleep;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -23,7 +22,7 @@ public class ManageUserPage extends BasePage{
     private final By BTN_CREATE_NEW_USER = By.xpath("//button[text()='Create new user']");
     private final By NOF_LOADING = By.xpath("//div[@id='NotiflixLoadingWrap']/div");
     private final By FIRST_USER = By.xpath("//tbody/tr[1]");
-    private final By FIRST_USER_STAFFCODE = By.xpath("//tbody/tr[1]/td[1]");
+    private final By FIRST_USER_NAME = By.xpath("//tbody/tr[1]/td[2]");
     private final String RANDOM_USER = "//tbody/tr[%s]";
     private final Pair<String, String> LBL_HEADER_TABLE = Pair.of("xpath", "//th[text()='%s']/button");
     private final Pair<String, String> LBL_DATA_LIST = Pair.of("xpath", "//div[@class='table-user-list']//th[text()='%s']/ancestor::thead/following-sibling::tbody//td[%s]");
@@ -94,12 +93,10 @@ public class ManageUserPage extends BasePage{
     }
     public int getTotalPage() {
         try {
-            int totalPage = parseInt(getText(BTN_LAST_PAGE));
-            return totalPage;
+            return parseInt(getText(BTN_LAST_PAGE));
         }
         catch(TimeoutException e) {
-            int totalPage = 1;
-            return totalPage;
+            return 1;
         }
     }
     public boolean verifySortOrderByString(ArrayList<String> list, String sortType) {
@@ -171,49 +168,53 @@ public class ManageUserPage extends BasePage{
         }
         ArrayList<String> listOfSortValue = new ArrayList<>();
         boolean flag = false;
-        switch(sortHeader) {
-            case "Joined Date":
-                for (int page = 1; page <= totalPage; page++) {
-                    isElementDisplayed(getByLocator(LBL_DATA_LIST, sortHeader, index));
-                    waitForVisibilityOfElementLocated(getByLocator(LBL_DATA_LIST, sortHeader, index));
-                    List<WebElement> dataList = waitForVisibilityOfAllElementsLocatedBy(getByLocator(LBL_DATA_LIST, sortHeader, index));
-                    for (WebElement data : dataList) {
-                        System.out.println(data.getText());
-                        listOfSortValue.add(data.getText());
-                    }
+        if ("Joined Date".equals(sortHeader)) {
+            for (int page = 1; page <= totalPage; page++) {
+                isElementDisplayed(getByLocator(LBL_DATA_LIST, sortHeader, index));
+                waitForVisibilityOfElementLocated(getByLocator(LBL_DATA_LIST, sortHeader, index));
+                List<WebElement> dataList = waitForVisibilityOfAllElementsLocatedBy(getByLocator(LBL_DATA_LIST, sortHeader, index));
+                for (WebElement data : dataList) {
+                    System.out.println(data.getText());
+                    listOfSortValue.add(data.getText());
+                }
+                if ((!verifySortOrderByDate(listOfSortValue, sortType)))
+                    break;
+                else
                     flag = verifySortOrderByDate(listOfSortValue, sortType);
-                    System.out.println(flag);
-                    if (totalPage > 1 && page < totalPage) {
-                        try {
-                            clickElement(BTN_NEXT_PAGE);
-                        } catch (ElementClickInterceptedException e) {
-                            clickElement(BTN_NEXT_PAGE);
-                        }
+                System.out.println(flag);
+                if (totalPage > 1 && page < totalPage) {
+                    try {
+                        clickElement(BTN_NEXT_PAGE);
+                    } catch (ElementClickInterceptedException e) {
+                        clickElement(BTN_NEXT_PAGE);
                     }
                 }
-                System.out.println(listOfSortValue);
-                break;
-            default:
-                for (int page = 1; page <= totalPage; page++) {
-                    isElementDisplayed(getByLocator(LBL_DATA_LIST, sortHeader, index));
-                    waitForVisibilityOfElementLocated(getByLocator(LBL_DATA_LIST, sortHeader, index));
-                    List<WebElement> dataList = waitForVisibilityOfAllElementsLocatedBy(getByLocator(LBL_DATA_LIST, sortHeader, index));
-                    for (WebElement data : dataList) {
-                        System.out.println(data.getText());
-                        listOfSortValue.add(data.getText());
-                    }
-                    flag = verifySortOrderByString(listOfSortValue, sortType);
-                    System.out.println(flag);
-                    if (totalPage > 1 && page < totalPage) {
-                        try {
-                            clickElement(BTN_NEXT_PAGE);
-                        } catch (ElementClickInterceptedException e) {
-                            clickElement(BTN_NEXT_PAGE);
-                        }
-                    }
-                }
-                System.out.println(listOfSortValue);
             }
+            System.out.println(listOfSortValue);
+        } else {
+            for (int page = 1; page <= totalPage; page++) {
+                isElementDisplayed(getByLocator(LBL_DATA_LIST, sortHeader, index));
+                waitForVisibilityOfElementLocated(getByLocator(LBL_DATA_LIST, sortHeader, index));
+                List<WebElement> dataList = waitForVisibilityOfAllElementsLocatedBy(getByLocator(LBL_DATA_LIST, sortHeader, index));
+                for (WebElement data : dataList) {
+                    System.out.println(data.getText());
+                    listOfSortValue.add(data.getText());
+                }
+                if ((!verifySortOrderByString(listOfSortValue, sortType)))
+                    break;
+                else
+                    flag = verifySortOrderByString(listOfSortValue, sortType);
+                System.out.println(flag);
+                if (totalPage > 1 && page < totalPage) {
+                    try {
+                        clickElement(BTN_NEXT_PAGE);
+                    } catch (ElementClickInterceptedException e) {
+                        clickElement(BTN_NEXT_PAGE);
+                    }
+                }
+            }
+            System.out.println(listOfSortValue);
+        }
         return flag;
     }
     public void clickFilterType(String filterType) {
@@ -272,6 +273,10 @@ public class ManageUserPage extends BasePage{
         clickElement(BTN_SEARCH);
         isElementDisplayed(getByLocator(LBL_DATA_LIST, "Full Name", "2"));
     }
+    public void waitForUserAppear(String name) throws InterruptedException {
+        waitForTextToBePresentInElementLocated(FIRST_USER_NAME, name);
+        sleep(2000);
+    }
     public ArrayList<String> getTextOfListElement(By locator) {
         List<WebElement> Elements = waitForVisibilityOfAllElementsLocatedBy(locator);
         ArrayList<String> list = new ArrayList<>();
@@ -286,7 +291,7 @@ public class ManageUserPage extends BasePage{
             case "Staff Code": index = "1"; break;
             case "Full Name": index = "2"; break;
         }
-        sleep(5000);
+        sleep(2000);
         if(isElementDisplayed(getByLocator(LBL_DATA_LIST, "Full Name", "2"))) {
             ArrayList<String> resultTextDataList = getTextOfListElement(getByLocator(LBL_DATA_LIST, searchType, index));
             for (String data :resultTextDataList) {
@@ -298,9 +303,13 @@ public class ManageUserPage extends BasePage{
         return true;
     }
     /** -------------------- Disable User Methods ---------------------*/
-    public void clickCreatedUserToDisable() {
+    public void clickDisableUserButton() {
+        List<WebElement> listOfUser = waitForVisibilityOfAllElementsLocatedBy(getByLocator(LBL_DATA_LIST, "Staff Code", "1"));
+        String createdUserStaffCode = listOfUser.get(0).getText();
+        clickElement(getByLocator(BTN_DISABLE_USER,createdUserStaffCode));
+    }
+    public void clickDisableButton() {
 
     }
-
 
 }

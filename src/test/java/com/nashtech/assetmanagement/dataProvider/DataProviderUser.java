@@ -3,6 +3,7 @@ package com.nashtech.assetmanagement.dataProvider;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.nashtech.assetmanagement.utils.JsonUtil;
+import org.openqa.selenium.json.Json;
 import org.testng.annotations.DataProvider;
 
 import static com.nashtech.assetmanagement.utils.JsonUtil.readJsonFile;
@@ -45,6 +46,7 @@ public class DataProviderUser {
                 {admin}, {staff}
         };
     }
+
 
 
 }

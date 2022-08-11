@@ -118,6 +118,7 @@ public class BasePage {
         wait.until(ExpectedConditions.textToBePresentInElementValue(locator, text));
     }
 
+
     public static boolean isElementDisplayed(By locator) {
         try {
             waitForVisibilityOfElementLocated(locator);
@@ -191,7 +192,9 @@ public class BasePage {
         WebElement element = waitForVisibilityOfElementLocated(locator);
         return element.getAttribute("disabled");
     }
-
+    public static String getAttribute(By locator, String text) {
+        return waitForVisibilityOfElementLocated(locator).getAttribute(text);
+    }
     public static ArrayList<String> getTextOfElements(By locator, Boolean moveToElement) {
         List<WebElement> elements = findElements(locator);
         ArrayList<String> result = new ArrayList<>();

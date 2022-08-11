@@ -95,6 +95,7 @@ public class HomePage extends BasePage{
         return !(isElementDisplayed(MODAL_CHANGEPASSWORD));
     }
     public void waitLoadingScreen() {
+        waitForVisibilityOfElementLocated(NOF_LOADING);
         waitForStalenessOfElementLocated(findElement(NOF_LOADING));
     }
 }

@@ -1,5 +1,6 @@
 package com.nashtech.assetmanagement.tests;
 
+import com.nashtech.assetmanagement.dataProvider.DataProviderSearch;
 import com.nashtech.assetmanagement.pages.*;
 import com.nashtech.assetmanagement.pages.shared.ModalHandle;
 import org.testng.annotations.BeforeMethod;
@@ -26,41 +27,41 @@ public class VerifyAdminSortCriteriaTest extends BaseTest {
         loginPage.loginWithDefaultAccount();
     }
     //Header = {"Staff Code", "Full Name", "Joined Date", "Type"} - sortType = {"ascending", "descending"}
-    @Test
-    public void verifyAdminSearchByHeaderCriteria() throws InterruptedException, ParseException {
+    @Test(dataProvider = "sortHeaderUserData", dataProviderClass = DataProviderSearch.class)
+    public void verifyAdminSearchByHeaderCriteria(String sortHeader, String sortType) throws InterruptedException, ParseException {
         alertHandle.closeAlert();
         homePage.moveToPage("Manage User");
         homePage.waitLoadingScreen();
-        manageUserPage.clickSortButton("Joined Date", "descending");
+        manageUserPage.clickSortButton(sortHeader, sortType);
         assertThat(
                 "Verify sort order: ",
-                manageUserPage.verifySortByHeader("Joined Date", "descending"),
+                manageUserPage.verifySortByHeader(sortHeader, sortType),
                 equalTo(true)
         );
     }
     //Filter = {"All", "Admin", "Staff"}
-    @Test
-    public void verifyAdminSearchByFilterCriteria() throws InterruptedException {
+    @Test(dataProvider = "filterUserData", dataProviderClass = DataProviderSearch.class)
+    public void verifyAdminSearchByFilterCriteria(String filterType) throws InterruptedException {
         alertHandle.closeAlert();
         homePage.moveToPage("Manage User");
         homePage.waitLoadingScreen();
-        manageUserPage.clickFilterType("Staff");
+        manageUserPage.clickFilterType(filterType);
         assertThat(
                 "Verify sort order: ",
-                manageUserPage.verifySortByFilter("Staff"),
+                manageUserPage.verifySortByFilter(filterType),
                 equalTo(true)
         );
     }
-    @Test
-    public void verifyAdminSearchBySearchBarCriteria() throws InterruptedException {
+    @Test(dataProvider = "searchData", dataProviderClass = DataProviderSearch.class)
+    public void verifyAdminSearchBySearchBarCriteria(String searchData, String searchType) throws InterruptedException {
         alertHandle.closeAlert();
         homePage.moveToPage("Manage User");
         homePage.waitLoadingScreen();
-        manageUserPage.inputSearchCriteria("SD00");
+        manageUserPage.inputSearchCriteria(searchData);
         manageUserPage.clickSearchButton();
         assertThat(
                 "Verify sort order: ",
-                manageUserPage.verifySearchCriteria("SD00","Staff Code"),
+                manageUserPage.verifySearchCriteria(searchData,searchType),
                 equalTo(true)
         );
     }

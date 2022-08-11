@@ -53,7 +53,7 @@ public class ChangePasswordTest extends BaseTest {
         loginPage.login(username, user.get("newPassword").getAsString());
 
         assertThat("verify message login success by new password: ",
-                alertHandle.getPopupMessageText(),
+                alertHandle.getAlertMessageText(),
                 equalTo("Login success!!!")
         );
 
