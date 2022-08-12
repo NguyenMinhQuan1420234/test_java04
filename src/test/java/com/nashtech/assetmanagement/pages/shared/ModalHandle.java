@@ -17,7 +17,7 @@ public class ModalHandle extends BasePage {
     public final By MODAL_NOT_DISABLE = By.xpath("//div[@class='modal fade  show d-block']//div[@class='modal-subtitle']");
     public final By MODAL_STATUS = By.xpath("//div[@class='modal fade  d-none']");
     public final Pair<String, String> BTN_MODAL = Pair.of("xpath", "//div[@class='modal fade  show d-block']//button[@id='%s']");
-    // Disable = 'disable-button' ; Cancel = 'cancel-button' ; Close = 'btnClose'
+    // Disable = 'disable-button' ; Cancel = 'cancel-button' ; Close = 'btnClose'ncel
     /** -------------------- Toastify Popup ---------------------*/
 
     public String getAlertMessageText() {
