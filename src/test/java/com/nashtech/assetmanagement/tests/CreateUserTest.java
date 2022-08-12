@@ -42,7 +42,7 @@ public class CreateUserTest extends BaseTest {
         createUserPage.selectGender(user.get("gender").getAsString());
         createUserPage.inputJoinDate(user.get("joinDate").getAsString());
         createUserPage.selectUserType(user.get("type").getAsString());
-        createUserPage.clickButton("save");
+        createUserPage.clickSaveButton();
 
         assertThat(
                 "verify create message: ",

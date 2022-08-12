@@ -14,6 +14,7 @@ public class CreateUserPage extends  BasePage {
     private final By TXT_JOINDATE = By.id("joinedDate");
     private final By DDL_TYPE = By.id("cars");
     private final By DDL_LOCATION = By.xpath("//label[text()='Location']/following-sibling::select");
+    private  final By BTN_SAVE = By.id("save");
     /** -------------------- Page Methods ---------------------*/
     public void inputFirstname(String firstname) {
         inputText(TXT_FIRSTNAME, firstname);
@@ -53,6 +54,9 @@ public class CreateUserPage extends  BasePage {
             selectElementValue(DDL_LOCATION, "Ha Noi");
 
         }
+    }
+    public void clickSaveButton() {
+        clickElement(BTN_SAVE);
     }
     public void clickButton(String text) {
         By BTN = By.id(String.format("%s", text));
