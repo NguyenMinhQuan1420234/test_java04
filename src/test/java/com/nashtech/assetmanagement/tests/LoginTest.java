@@ -32,6 +32,7 @@ public class LoginTest extends BaseTest{
     @Test
     public void loginSuccessfullyWithValidAccount() {
         LOGGER.info("loginSuccessfullyWithValidAccount");
+        homePage.waitLoadingScreen();
         loginPage.inputUserName(username);
         loginPage.inputPassword(password);
         loginPage.clickLoginBtn();
@@ -41,6 +42,7 @@ public class LoginTest extends BaseTest{
     @Test
     public void loginUnsuccessfullyWithEmptyUsername(){
         LOGGER.info("loginUnsuccessfullyWithEmptyUsername");
+        homePage.waitLoadingScreen();
         loginPage.inputPassword(password);
 //        loginPage.clickLoginBtn();
         boolean disabledBtn = loginPage.getLoginBtnDisabled();
@@ -49,6 +51,7 @@ public class LoginTest extends BaseTest{
     @Test
     public void loginUnsuccessfullyWithEmptyPassword(){
         LOGGER.info("loginUnsuccessfullyWithEmptyPassword");
+        homePage.waitLoadingScreen();
         loginPage.inputUserName(username);
 //        loginPage.clickLoginBtn();
         boolean LoginMsg = loginPage.getLoginBtnDisabled();
@@ -57,6 +60,7 @@ public class LoginTest extends BaseTest{
     @Test
     public void loginUnsuccessfullyWithInvalidUsername(){
         LOGGER.info("loginUnsuccessfullyWithInvalidUsername");
+        homePage.waitLoadingScreen();
         loginPage.inputUserName("hoadoan123456");
         loginPage.inputPassword(password);
         loginPage.clickLoginBtn();
@@ -66,6 +70,7 @@ public class LoginTest extends BaseTest{
     @Test
     public void loginUnsuccessfullyWithInvalidPassword(){
         LOGGER.info("loginUnsuccessfullyWithInvalidPassword");
+        homePage.waitLoadingScreen();
         loginPage.inputUserName(username);
         loginPage.inputPassword("Password");
         loginPage.clickLoginBtn();

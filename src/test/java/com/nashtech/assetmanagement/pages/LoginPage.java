@@ -42,7 +42,7 @@ public class LoginPage extends BasePage{
     }
 
     public void loginWithDefaultAccount() {
-        waitForStalenessOfElementLocated(waitForVisibilityOfElementLocated(NOF_LOADING));
+        waitForStalenessOfElementLocated(waitForPresentOfElementLocated(NOF_LOADING));
         inputUserName(System.getProperty("USERNAME"));
         inputPassword(System.getProperty("PASSWORD"));
         clickLoginBtn();
@@ -65,7 +65,6 @@ public class LoginPage extends BasePage{
         clickElement(BTN_Profile);
         clickElement(BTN_Logout);
         clickElement(BTN_LogoutAccepted);
-        waitForStalenessOfElementLocated(waitForVisibilityOfElementLocated(NOF_LOADING));
     }
 
     public boolean isErrorIconDisplayedInUsername() {

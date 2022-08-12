@@ -34,8 +34,7 @@ public class LogOutTest extends BaseTest{
             modalHandle.closeAlert();
             LOGGER.info("logoutSuccessfully");
             loginPage.logout();
-            String errorMsg = loginPage.getErrorMessage();
-            assertThat("Verify error message", errorMsg, equalTo("Logout successfully!"));
+            assertThat("Verify error message", modalHandle.getAlertMessageText(), equalTo("Logout successfully!"));
         }
         @Test
         public void logoutUnSuccessfully(){

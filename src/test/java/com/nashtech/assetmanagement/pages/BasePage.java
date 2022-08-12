@@ -88,6 +88,10 @@ public class BasePage {
         WebDriverWait wait = new WebDriverWait(Browser.getDriver(), Duration.ofSeconds(SELENIUM_TIMEOUT_SECONDS));
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
+    public static WebElement waitForPresentOfElementLocated(By locator) {
+        WebDriverWait wait = new WebDriverWait(Browser.getDriver(), Duration.ofSeconds(SELENIUM_TIMEOUT_SECONDS));
+        return wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+    }
 
     public static List<WebElement> waitForVisibilityOfAllElementsLocatedBy(By locator) {
         WebDriverWait wait = new WebDriverWait(Browser.getDriver(), Duration.ofSeconds(SELENIUM_TIMEOUT_SECONDS));

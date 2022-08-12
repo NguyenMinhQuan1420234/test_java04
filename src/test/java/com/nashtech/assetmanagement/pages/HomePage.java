@@ -9,7 +9,7 @@ public class HomePage extends BasePage{
 
     /**-------Head Bar-------*/
 
-    public static final By LBL_USERNAME = By.id("user_header");
+    public static final By LBL_USERNAME = By.xpath("(//div[@id='user_header']//span)[1]");
     public static final By DDL_HEADER_MENU = By.id("dropdownMenuReference");
     public static final By OPT_LOGOUT = By.xpath("//li[text()='Logout']");
     public static final By OPT_CHANGEPASSWORD = By.id("li-bottom");
