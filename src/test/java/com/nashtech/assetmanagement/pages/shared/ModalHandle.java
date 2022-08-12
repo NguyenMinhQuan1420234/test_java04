@@ -41,7 +41,7 @@ public class ModalHandle extends BasePage {
         return getText(MODAL_NOT_DISABLE);
     }
     public boolean verifyModalDisappear() {
-        if(getAttribute(MODAL_NOT_DISABLE, "class").equals("modal fade  d-none"))
+        if(getAttribute(MODAL_STATUS, "class").equals("modal fade  d-none"))
             return true;
         else
             return false;

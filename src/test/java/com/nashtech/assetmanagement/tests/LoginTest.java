@@ -42,7 +42,7 @@ public class LoginTest extends BaseTest{
     public void loginUnsuccessfullyWithEmptyUsername(){
         LOGGER.info("loginUnsuccessfullyWithEmptyUsername");
         loginPage.inputPassword(password);
-        loginPage.clickLoginBtn();
+//        loginPage.clickLoginBtn();
         boolean disabledBtn = loginPage.getLoginBtnDisabled();
         assertThat("Verify disabled",disabledBtn , equalTo(Boolean.TRUE));
     }
@@ -50,7 +50,7 @@ public class LoginTest extends BaseTest{
     public void loginUnsuccessfullyWithEmptyPassword(){
         LOGGER.info("loginUnsuccessfullyWithEmptyPassword");
         loginPage.inputUserName(username);
-        loginPage.clickLoginBtn();
+//        loginPage.clickLoginBtn();
         boolean LoginMsg = loginPage.getLoginBtnDisabled();
         assertThat("Verify username", LoginMsg, equalTo(Boolean.TRUE));
     }

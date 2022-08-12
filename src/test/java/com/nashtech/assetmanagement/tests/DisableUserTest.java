@@ -5,6 +5,7 @@ import com.nashtech.assetmanagement.dataProvider.DataProviderSearch;
 import com.nashtech.assetmanagement.dataProvider.DataProviderUser;
 import com.nashtech.assetmanagement.pages.*;
 import com.nashtech.assetmanagement.pages.shared.ModalHandle;
+import org.openqa.selenium.json.Json;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -54,20 +55,22 @@ public class DisableUserTest extends BaseTest {
                 equalTo("No user founded")
         );
     }
-    @Test(dataProvider = "searchDataForDisableTest", dataProviderClass = DataProviderSearch.class)
-    public void verifyAdminClickCancelDisableUserModal(String user) throws InterruptedException {
+    @Test(dataProvider = "createUserAccount", dataProviderClass = DataProviderUser.class)
+    public void verifyAdminClickCancelDisableUserModal(JsonObject user) throws InterruptedException {
         homePage.moveToPage("Manage User");
         homePage.waitLoadingScreen();
-        manageUserPage.inputSearchCriteria(user);
-        manageUserPage.clickSearchButton();
-        manageUserPage.waitForUserAppear(user);
+        manageUserPage.clickCreateNewUserButton();
+        createUserPage.createUser(user);
+        manageUserPage.clickDetailFirstUser();
+        String createdUserStaffCode = detailInformationPage.getUserDetail("Staff Code");
+        detailInformationPage.clickClose(createdUserStaffCode);
         manageUserPage.clickDisableUserButton();
+        alertHandle.clickModalButton("cancel-button");
 
         assertThat(
-                "verify delete user successful: ",
-                alertHandle.getModalText(),
-                equalTo("There are valid assignments belonging to this user.\n" +
-                        "Please close all assignments before disabling user.")
+                "verify cancel button works: ",
+                alertHandle.verifyModalDisappear(),
+                equalTo(true)
         );
     }
     @Test(dataProvider = "searchDataForDisableTest", dataProviderClass = DataProviderSearch.class)
@@ -98,7 +101,7 @@ public class DisableUserTest extends BaseTest {
         alertHandle.clickModalButton("btnClose");
 
         assertThat(
-                "verify delete user successful: ",
+                "verify modal is closed: ",
                 alertHandle.verifyModalDisappear(),
                 equalTo(true)
         );

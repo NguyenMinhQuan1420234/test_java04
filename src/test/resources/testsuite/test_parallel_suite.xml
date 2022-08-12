@@ -16,6 +16,11 @@
             <class name="com.nashtech.assetmanagement.tests.VerifyAdminSortCriteriaTest" />
         </classes>
     </test>
+    <test name="DisableUserTest">
+        <classes>
+            <class name="com.nashtech.assetmanagement.tests.DisableUserTest" />
+        </classes>
+    </test>
     <test name="LoginTest">
         <classes>
             <class name="com.nashtech.assetmanagement.tests.LoginTest" />

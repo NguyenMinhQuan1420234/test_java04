@@ -42,7 +42,6 @@ public class ManageUserPage extends BasePage{
 
     public void clickCreateNewUserButton() {
         try {
-            waitForStalenessOfElementLocated(findElement(NOF_LOADING));
             clickElement(BTN_CREATE_NEW_USER);
         }
         catch (NoSuchElementException e) {
@@ -89,7 +88,7 @@ public class ManageUserPage extends BasePage{
                 }
             }
         }
-        sleep(2000);
+        sleep(3000);
     }
     public int getTotalPage() {
         try {
@@ -285,22 +284,25 @@ public class ManageUserPage extends BasePage{
         }
         return list;
     }
-    public boolean verifySearchCriteria(String searchText, String searchType) throws InterruptedException {
+    public String verifySearchCriteria(String searchText, String searchType) throws InterruptedException {
         String index = "";
         switch(searchType) {
             case "Staff Code": index = "1"; break;
             case "Full Name": index = "2"; break;
         }
-        sleep(2000);
+        sleep(3000);
+        String searchResult = "";
         if(isElementDisplayed(getByLocator(LBL_DATA_LIST, "Full Name", "2"))) {
             ArrayList<String> resultTextDataList = getTextOfListElement(getByLocator(LBL_DATA_LIST, searchType, index));
             for (String data :resultTextDataList) {
                 System.out.println(data);
                 if(!(data.contains(searchText)))
-                    return false;
+                    return null;
+                else
+                    searchResult =  data;
             }
         }
-        return true;
+        return searchResult;
     }
     /** -------------------- Disable User Methods ---------------------*/
     public void clickDisableUserButton() {

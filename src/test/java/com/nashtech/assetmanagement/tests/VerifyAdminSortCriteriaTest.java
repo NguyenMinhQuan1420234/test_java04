@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 import java.text.ParseException;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
 
 public class VerifyAdminSortCriteriaTest extends BaseTest {
@@ -47,7 +48,7 @@ public class VerifyAdminSortCriteriaTest extends BaseTest {
         homePage.waitLoadingScreen();
         manageUserPage.clickFilterType(filterType);
         assertThat(
-                "Verify sort order: ",
+                "Verify filter result: ",
                 manageUserPage.verifySortByFilter(filterType),
                 equalTo(true)
         );
@@ -60,9 +61,9 @@ public class VerifyAdminSortCriteriaTest extends BaseTest {
         manageUserPage.inputSearchCriteria(searchData);
         manageUserPage.clickSearchButton();
         assertThat(
-                "Verify sort order: ",
+                "Verify search result: ",
                 manageUserPage.verifySearchCriteria(searchData,searchType),
-                equalTo(true)
+                containsString(searchData)
         );
     }
     @Test
