@@ -3,7 +3,9 @@ package com.nashtech.assetmanagement.tests;
 import com.google.gson.JsonObject;
 import com.nashtech.assetmanagement.dataProvider.DataProviderUser;
 import com.nashtech.assetmanagement.pages.*;
+import com.nashtech.assetmanagement.pages.shared.DetailedInformationPage;
 import com.nashtech.assetmanagement.pages.shared.ModalHandle;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -31,7 +33,7 @@ public class CreateUserTest extends BaseTest {
         alertHandle.closeAlert();
     }
 
-    @Test(dataProvider = "createUserWithAdminAccount", dataProviderClass = DataProviderUser.class)
+    @Test(dataProvider = "createUserWithAdminAccount", dataProviderClass = DataProviderUser.class, groups = {"1"})
     public void createUserSuccessfully(JsonObject user) {
         homePage.moveToPage("Manage User");
         homePage.waitLoadingScreen();
@@ -53,7 +55,7 @@ public class CreateUserTest extends BaseTest {
         alertHandle.closeAlert();
     }
 
-    @Test(dataProvider = "createUserAccount", dataProviderClass = DataProviderUser.class)
+    @Test(dataProvider = "createUserAccount", dataProviderClass = DataProviderUser.class, groups = {"1"})
     public void verifyNewUserAddedToTopOfUserListSuccessfully(JsonObject user) {
         homePage.moveToPage("Manage User");
         homePage.waitLoadingScreen();
@@ -94,6 +96,8 @@ public class CreateUserTest extends BaseTest {
                 user.get("type").getAsString(),
                 equalTo(detailInformationPage.getUserDetail("Type"))
         );
+
+        detailInformationPage.clickClose();
     }
 
     @Test(dataProvider = "createUserAccount", dataProviderClass = DataProviderUser.class)
@@ -115,5 +119,9 @@ public class CreateUserTest extends BaseTest {
                 equalTo("User List")
         );
     }
-
+    @AfterMethod(onlyForGroups = {"1"})
+    public void disableCreatedUser() {
+        manageUserPage.clickFirstUserButton("disable");
+        alertHandle.clickModalButton("disable-button");
+    }
 }

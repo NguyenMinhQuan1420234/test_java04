@@ -37,6 +37,7 @@ public class ManageUserPage extends BasePage{
     private final By BTN_SEARCH = By.id("btnSearch");
     private final Pair<String, String> BTN_EDIT_USER = Pair.of("xpath", "//tr/td[text()='%s']/following-sibling::td/button[@id='btnEdit']");
     private final Pair<String, String> BTN_DISABLE_USER = Pair.of("xpath", "//tr/td[text()='%s']/following-sibling::td/button[@id='btnHighlight']");
+    private final Pair<String, String> BTN_EDIT_DISABLE_USER = Pair.of("xpath", "//tr/td[text()='%s']/following-sibling::td/button[@id='%s']");
 
     /** -------------------- Page Methods ---------------------*/
 
@@ -274,7 +275,6 @@ public class ManageUserPage extends BasePage{
     }
     public void waitForUserAppear(String name) throws InterruptedException {
         waitForTextToBePresentInElementLocated(FIRST_USER_NAME, name);
-        sleep(2000);
     }
     public ArrayList<String> getTextOfListElement(By locator) {
         List<WebElement> Elements = waitForVisibilityOfAllElementsLocatedBy(locator);
@@ -304,14 +304,26 @@ public class ManageUserPage extends BasePage{
         }
         return searchResult;
     }
-    /** -------------------- Disable User Methods ---------------------*/
+    /** -------------------- Click Edit/Disable User Methods ---------------------*/
     public void clickDisableUserButton() {
         List<WebElement> listOfUser = waitForVisibilityOfAllElementsLocatedBy(getByLocator(LBL_DATA_LIST, "Staff Code", "1"));
         String createdUserStaffCode = listOfUser.get(0).getText();
         clickElement(getByLocator(BTN_DISABLE_USER,createdUserStaffCode));
     }
-    public void clickDisableButton() {
+    public void clickFirstUserButton(String buttonType) {
+        List<WebElement> listOfUser = waitForVisibilityOfAllElementsLocatedBy(getByLocator(LBL_DATA_LIST, "Staff Code", "1"));
+        String createdUserStaffCode = listOfUser.get(0).getText();
+        if(buttonType.equals("edit"))
+            clickElement(getByLocator(BTN_EDIT_DISABLE_USER,createdUserStaffCode,"btnEdit"));
+        else if(buttonType.equals("disable"))
+            clickElement(getByLocator(BTN_EDIT_DISABLE_USER,createdUserStaffCode,"btnHighlight"));
+    }
 
+    public void clickUserButtonByStaffCode(String buttonType, String staffCode) {
+        if(buttonType.equals("edit"))
+            clickElement(getByLocator(BTN_EDIT_DISABLE_USER,staffCode,"btnEdit"));
+        else if(buttonType.equals("disable"))
+            clickElement(getByLocator(BTN_EDIT_DISABLE_USER,staffCode,"btnHighlight"));
     }
 
 }

@@ -2,6 +2,7 @@ package com.nashtech.assetmanagement.tests;
 
 import com.nashtech.assetmanagement.constants.UrlConstants;
 import com.nashtech.assetmanagement.pages.*;
+import com.nashtech.assetmanagement.pages.shared.DetailedInformationPage;
 import com.nashtech.assetmanagement.pages.shared.ModalHandle;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

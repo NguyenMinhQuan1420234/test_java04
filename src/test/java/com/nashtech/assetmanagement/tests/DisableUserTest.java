@@ -4,8 +4,8 @@ import com.google.gson.JsonObject;
 import com.nashtech.assetmanagement.dataProvider.DataProviderSearch;
 import com.nashtech.assetmanagement.dataProvider.DataProviderUser;
 import com.nashtech.assetmanagement.pages.*;
+import com.nashtech.assetmanagement.pages.shared.DetailedInformationPage;
 import com.nashtech.assetmanagement.pages.shared.ModalHandle;
-import org.openqa.selenium.json.Json;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -42,8 +42,8 @@ public class DisableUserTest extends BaseTest {
         createUserPage.createUser(user);
         manageUserPage.clickDetailFirstUser();
         String createdUserStaffCode = detailInformationPage.getUserDetail("Staff Code");
-        detailInformationPage.clickClose(createdUserStaffCode);
-        manageUserPage.clickDisableUserButton();
+        detailInformationPage.clickClose();
+        manageUserPage.clickFirstUserButton("disable");
         alertHandle.clickModalButton("disable-button");
         alertHandle.closeAlert();
         homePage.waitLoadingScreen();
@@ -62,9 +62,8 @@ public class DisableUserTest extends BaseTest {
         manageUserPage.clickCreateNewUserButton();
         createUserPage.createUser(user);
         manageUserPage.clickDetailFirstUser();
-        String createdUserStaffCode = detailInformationPage.getUserDetail("Staff Code");
-        detailInformationPage.clickClose(createdUserStaffCode);
-        manageUserPage.clickDisableUserButton();
+        detailInformationPage.clickClose();
+        manageUserPage.clickFirstUserButton("disable");
         alertHandle.clickModalButton("cancel-button");
 
         assertThat(

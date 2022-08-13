@@ -8,7 +8,7 @@ public class HomePage extends BasePage{
     /** ------------------ Web Elements ----------------------*/
 
     /**-------Head Bar-------*/
-
+    public  static final By LBL_HEADER_TITLE = By.cssSelector("div.header__title");
     public static final By LBL_USERNAME = By.xpath("(//div[@id='user_header']//span)[1]");
     public static final By DDL_HEADER_MENU = By.id("dropdownMenuReference");
     public static final By OPT_LOGOUT = By.xpath("//li[text()='Logout']");
@@ -97,5 +97,8 @@ public class HomePage extends BasePage{
     public void waitLoadingScreen() {
         waitForVisibilityOfElementLocated(NOF_LOADING);
         waitForStalenessOfElementLocated(findElement(NOF_LOADING));
+    }
+    public String getCurrentPageName() {
+        return getText(LBL_HEADER_TITLE);
     }
 }

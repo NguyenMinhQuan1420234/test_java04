@@ -2,6 +2,7 @@ package com.nashtech.assetmanagement.tests;
 
 import com.nashtech.assetmanagement.dataProvider.DataProviderSearch;
 import com.nashtech.assetmanagement.pages.*;
+import com.nashtech.assetmanagement.pages.shared.DetailedInformationPage;
 import com.nashtech.assetmanagement.pages.shared.ModalHandle;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;

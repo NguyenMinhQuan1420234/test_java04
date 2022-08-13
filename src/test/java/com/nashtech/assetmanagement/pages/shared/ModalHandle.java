@@ -7,6 +7,8 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
+import static com.nashtech.assetmanagement.pages.HomePage.NOF_LOADING;
+
 public class ModalHandle extends BasePage {
     /** -------------------- Toastify Popup Elements---------------------*/
     public final By MSG_ALERT = By.cssSelector("div[class*='toast-body']>div:last-child");
@@ -31,6 +33,10 @@ public class ModalHandle extends BasePage {
     }
     public void waitForAlertMessageDisappear() {
         waitForStalenessOfElementLocated(waitForVisibilityOfElementLocated(MSG_ALERT));
+    }
+    public void waitLoadingScreen() {
+        waitForVisibilityOfElementLocated(NOF_LOADING);
+        waitForStalenessOfElementLocated(findElement(NOF_LOADING));
     }
 
     /** -------------------- Modal Popup ---------------------*/

@@ -2,6 +2,7 @@ package com.nashtech.assetmanagement.pages;
 
 import com.google.gson.JsonObject;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 public class CreateUserPage extends  BasePage {
@@ -71,6 +72,14 @@ public class CreateUserPage extends  BasePage {
         inputJoinDate(user.get("joinDate").getAsString());
         selectUserType(user.get("type").getAsString());
         clickButton("save");
+    }
+
+    public boolean fieldCannotBeEdited(String textFieldName) {
+        if (textFieldName.equals("First Name"))
+            return !(waitForVisibilityOfElementLocated(TXT_FIRSTNAME).isEnabled());
+        else if(textFieldName.equals("Last Name"))
+            return !(waitForVisibilityOfElementLocated(TXT_FIRSTNAME).isEnabled());
+        return false;
     }
 
 }

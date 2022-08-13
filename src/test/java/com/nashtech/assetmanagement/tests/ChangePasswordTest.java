@@ -3,6 +3,7 @@ package com.nashtech.assetmanagement.tests;
 import com.google.gson.JsonObject;
 import com.nashtech.assetmanagement.dataProvider.DataProviderUser;
 import com.nashtech.assetmanagement.pages.*;
+import com.nashtech.assetmanagement.pages.shared.DetailedInformationPage;
 import com.nashtech.assetmanagement.pages.shared.ModalHandle;
 import com.nashtech.assetmanagement.utils.RandomStringUtil;
 import org.testng.annotations.BeforeMethod;
@@ -40,7 +41,7 @@ public class ChangePasswordTest extends BaseTest {
         createUserPage.createUser(user);
         alertHandle.closeAlert();
         manageUserPage.clickDetailFirstUser();
-        detailInformationPage.clickClose(detailInformationPage.getUserDetail("Staff Code"));
+        detailInformationPage.clickClose();
         String username = detailInformationPage.getUserDetail("Username");
         String accountPassword = username + user.get("password").getAsString();
         homePage.logout();
