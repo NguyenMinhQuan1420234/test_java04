@@ -69,24 +69,14 @@ public class ManageUserPage extends BasePage{
     }
     //Header = {"Staff Code", "Full Name", "Joined Date", "Type"} - sortType = {"ascending", "descending"}
     public void clickSortButton(String Header, String sortType) throws InterruptedException {
-        WebElement clickButton;
+        WebElement clickButton= waitForElementToBeClickable(getByLocator(BTN_HEADER_SORT, Header));;
         if(isElementDisplayed(getByLocator(LBL_DATA_LIST, Header, "1"))) {
-            if (sortType.equals("descending")) {
-                clickButton = waitForElementToBeClickable(getByLocator(BTN_HEADER_SORT, Header));
-                try {
+            if (sortType.equals("ascending")) {
                     clickButton.click();
-                } catch (ElementClickInterceptedException e) {
-                    clickButton.click();
-                }
-            } else if (sortType.equals("ascending")) {
-                clickButton = waitForElementToBeClickable(getByLocator(BTN_HEADER_SORT, Header));
-                try {
+            }
+            else if (sortType.equals("descending")) {
                     clickButton.click();
                     clickButton.click();
-                } catch (ElementClickInterceptedException e) {
-                    clickButton.click();
-                    clickButton.click();
-                }
             }
         }
         sleep(3000);
@@ -103,6 +93,7 @@ public class ManageUserPage extends BasePage{
         if (sortType.equals("ascending"))
             for(int i = 0; i < list.size()-1; i++) {
                 if (list.get(i + 1).compareToIgnoreCase(list.get(i)) < 0) {
+                    System.out.println("fail at");
                     System.out.println(list.get(i + 1));
                     System.out.println(list.get(i));
                     return false;
@@ -111,6 +102,7 @@ public class ManageUserPage extends BasePage{
         else if (sortType.equals("descending")) {
             for (int i = 0; i < list.size() - 1; i++) {
                 if (list.get(i + 1).compareToIgnoreCase(list.get(i)) > 0) {
+                    System.out.println("fail at");
                     System.out.println(list.get(i + 1));
                     System.out.println(list.get(i));
                     return false;
@@ -120,6 +112,7 @@ public class ManageUserPage extends BasePage{
         else
             for (int i = 0; i < list.size() - 1; i++) {
                 if (!(list.get(i + 1).equals(list.get(i)))) {
+                    System.out.println("fait at");
                     System.out.println(list.get(i + 1));
                     System.out.println(list.get(i));
                     return false;
@@ -137,6 +130,7 @@ public class ManageUserPage extends BasePage{
                 date2 = new SimpleDateFormat("MM/dd/yyyy").parse(list.get(i+1));
                 date1 = new SimpleDateFormat("MM/dd/yyyy").parse(list.get(i));
                 if (date2.before(date1)) {
+                    System.out.println("fait at");
                     System.out.println(list.get(i + 1));
                     System.out.println(list.get(i));
                     return false;
@@ -147,6 +141,7 @@ public class ManageUserPage extends BasePage{
                 date2 = new SimpleDateFormat("MM/dd/yyyy").parse(list.get(i+1));
                 date1 = new SimpleDateFormat("MM/dd/yyyy").parse(list.get(i));
                 if (date2.after(date1)) {
+                    System.out.println("fait at");
                     System.out.println(list.get(i + 1));
                     System.out.println(list.get(i));
                     return false;
@@ -157,7 +152,6 @@ public class ManageUserPage extends BasePage{
     }
 
     public boolean verifySortByHeader(String sortHeader, String sortType) throws InterruptedException, ParseException {
-//        clickSortButton(sortHeader, sortType);
         int totalPage = getTotalPage();
         String index = "";
         switch (sortHeader) {
