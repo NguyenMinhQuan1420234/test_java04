@@ -2,8 +2,6 @@ package com.nashtech.assetmanagement.pages;
 
 import com.google.gson.JsonObject;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
 
 public class CreateUserPage extends  BasePage {
     /** ------------------ Web Elements ----------------------*/
@@ -64,7 +62,7 @@ public class CreateUserPage extends  BasePage {
         clickElement(BTN);
     }
 
-    public void createUser(JsonObject user){
+    public void createUserDefault(JsonObject user){
         inputFirstname(user.get("firstName").getAsString());
         inputLastname(user.get("lastName").getAsString());
         inputDateOfBirth(user.get("dateOfBirth").getAsString());
@@ -73,8 +71,17 @@ public class CreateUserPage extends  BasePage {
         selectUserType(user.get("type").getAsString());
         clickButton("save");
     }
+    public void createUserCustomInput(String firstName, String lastName, String dateOfBirth, String gender, String joinDate, String type){
+        inputFirstname(firstName);
+        inputLastname(lastName);
+        inputDateOfBirth(dateOfBirth);
+        selectGender(gender);
+        inputJoinDate(joinDate);
+        selectUserType(type);
+        clickButton("save");
+    }
 
-    public boolean fieldCannotBeEdited(String textFieldName) {
+    public boolean isFieldEdited(String textFieldName) {
         if (textFieldName.equals("First Name"))
             return !(waitForVisibilityOfElementLocated(TXT_FIRSTNAME).isEnabled());
         else if(textFieldName.equals("Last Name"))

@@ -1,9 +1,9 @@
 {
   "validUserData": [
     {
-      "firstName": "quan",
-      "lastName": "nguyen",
-      "dateOfBirth": "05/09/1996",
+      "firstName": "tester",
+      "lastName": "automation",
+      "dateOfBirth": "05/05/1996",
       "dateOfBirthDetailFormat": "09/05/1996",
       "gender": "Male",
       "joinDate": "01/07/2022",
@@ -11,8 +11,8 @@
       "type": "ADMIN"
     },
     {
-      "firstName": "Nam",
-      "lastName": "nguyen",
+      "firstName": "tester",
+      "lastName": "manual",
       "dateOfBirth": "22/02/2000",
       "dateOfBirthDetailFormat": "02/22/2000",
       "gender": "Female",
@@ -51,26 +51,26 @@
     "newPassword": "123456"
   },
   "Admin": {
-    "username": "adminHCM",
+    "username": "admin",
     "oldPassword": "123456",
     "newPassword": "123456"
   },
   "Staff": {
-    "username": "adminHN",
+    "username": "admin",
     "oldPassword": "123456",
     "newPassword": "123456"
   },
   "AdminByLocation": [
     {
-      "username": "adminHCM",
+      "username": "admin",
       "password": "123456"
     },
     {
-      "username": "adminDN",
+      "username": "admin",
       "password": "123"
     },
     {
-      "username": "adminHN",
+      "username": "admin",
       "password": "123456"
     }
   ]

@@ -1,7 +1,7 @@
 package com.nashtech.assetmanagement.pages;
 
-import com.nashtech.assetmanagement.utils.Pair;
 import org.openqa.selenium.*;
+import static com.nashtech.assetmanagement.pages.shared.TableDataPage.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -20,24 +20,6 @@ import org.openqa.selenium.TimeoutException;
 public class ManageUserPage extends BasePage{
     /** ------------------ Web Elements ----------------------*/
     private final By BTN_CREATE_NEW_USER = By.xpath("//button[text()='Create new user']");
-    private final By NOF_LOADING = By.xpath("//div[@id='NotiflixLoadingWrap']/div");
-    private final By FIRST_USER = By.xpath("//tbody/tr[1]");
-    private final By FIRST_USER_NAME = By.xpath("//tbody/tr[1]/td[2]");
-    private final String RANDOM_USER = "//tbody/tr[%s]";
-    private final Pair<String, String> LBL_HEADER_TABLE = Pair.of("xpath", "//th[text()='%s']/button");
-    private final Pair<String, String> LBL_DATA_LIST = Pair.of("xpath", "//div[@class='table-user-list']//th[text()='%s']/ancestor::thead/following-sibling::tbody//td[%s]");
-    private final By LBL_USER_LIST = By.xpath("//div/h3");
-    private final By LBL_LOCATION_LIST = By.xpath("(//div[@class='detail-item']/div[text()='Location']/following-sibling::div)[i]");
-    private final By BTN_LAST_PAGE = By.xpath("//div[@class='paging']//button[last()-1]");
-    private final By BTN_NEXT_PAGE = By.xpath("//button[text()='Next']");
-    private final Pair<String, String> BTN_HEADER_SORT = Pair.of("xpath","//th[text()='%s']//button");
-    private final Pair<String, String> CHK_FILTER_TYPE = Pair.of("id","type%s");
-    private final By DDL_FILTER = By.id("dropMenuFilterType");
-    private final By TXT_SEARCH_BAR = By.cssSelector("div.search input");
-    private final By BTN_SEARCH = By.id("btnSearch");
-    private final Pair<String, String> BTN_EDIT_USER = Pair.of("xpath", "//tr/td[text()='%s']/following-sibling::td/button[@id='btnEdit']");
-    private final Pair<String, String> BTN_DISABLE_USER = Pair.of("xpath", "//tr/td[text()='%s']/following-sibling::td/button[@id='btnHighlight']");
-    private final Pair<String, String> BTN_EDIT_DISABLE_USER = Pair.of("xpath", "//tr/td[text()='%s']/following-sibling::td/button[@id='%s']");
 
     /** -------------------- Page Methods ---------------------*/
 
@@ -51,7 +33,7 @@ public class ManageUserPage extends BasePage{
     }
 
     public void clickDetailFirstUser() {
-        clickElement(FIRST_USER);
+        clickElement(FIRST_USER_NAME);
     }
 
     public String getPageTitle() {
@@ -63,19 +45,17 @@ public class ManageUserPage extends BasePage{
         String number = Integer.toString((int)(Math.random()*5 + 1));
         clickElement(By.xpath(String.format(RANDOM_USER, number)), true);
     }
-    public void isSearchCriteriaMatchExpected() {
-        int totalPage = parseInt(getText(BTN_LAST_PAGE));
 
-    }
     //Header = {"Staff Code", "Full Name", "Joined Date", "Type"} - sortType = {"ascending", "descending"}
     public void clickSortButton(String Header, String sortType) throws InterruptedException {
+        isElementDisplayed(getByLocator(LBL_DATA_LIST, "Full Name", "2"));
         WebElement clickButton= waitForElementToBeClickable(getByLocator(BTN_HEADER_SORT, Header));;
         if(isElementDisplayed(getByLocator(LBL_DATA_LIST, Header, "1"))) {
             if (sortType.equals("ascending")) {
                     clickButton.click();
+                    clickButton.click();
             }
             else if (sortType.equals("descending")) {
-                    clickButton.click();
                     clickButton.click();
             }
         }
@@ -264,8 +244,8 @@ public class ManageUserPage extends BasePage{
         inputText(TXT_SEARCH_BAR, text);
     }
     public void clickSearchButton() {
-        clickElement(BTN_SEARCH);
         isElementDisplayed(getByLocator(LBL_DATA_LIST, "Full Name", "2"));
+        clickElement(BTN_SEARCH);
     }
     public void waitForUserAppear(String name) throws InterruptedException {
         waitForTextToBePresentInElementLocated(FIRST_USER_NAME, name);
@@ -299,25 +279,20 @@ public class ManageUserPage extends BasePage{
         return searchResult;
     }
     /** -------------------- Click Edit/Disable User Methods ---------------------*/
-    public void clickDisableUserButton() {
-        List<WebElement> listOfUser = waitForVisibilityOfAllElementsLocatedBy(getByLocator(LBL_DATA_LIST, "Staff Code", "1"));
-        String createdUserStaffCode = listOfUser.get(0).getText();
-        clickElement(getByLocator(BTN_DISABLE_USER,createdUserStaffCode));
-    }
     public void clickFirstUserButton(String buttonType) {
         List<WebElement> listOfUser = waitForVisibilityOfAllElementsLocatedBy(getByLocator(LBL_DATA_LIST, "Staff Code", "1"));
         String createdUserStaffCode = listOfUser.get(0).getText();
         if(buttonType.equals("edit"))
-            clickElement(getByLocator(BTN_EDIT_DISABLE_USER,createdUserStaffCode,"btnEdit"));
+            clickElement(getByLocator(BTN_EDIT_DISABLE,createdUserStaffCode,"btnEdit"));
         else if(buttonType.equals("disable"))
-            clickElement(getByLocator(BTN_EDIT_DISABLE_USER,createdUserStaffCode,"btnHighlight"));
+            clickElement(getByLocator(BTN_EDIT_DISABLE,createdUserStaffCode,"btnHighlight"));
     }
 
     public void clickUserButtonByStaffCode(String buttonType, String staffCode) {
         if(buttonType.equals("edit"))
-            clickElement(getByLocator(BTN_EDIT_DISABLE_USER,staffCode,"btnEdit"));
+            clickElement(getByLocator(BTN_EDIT_DISABLE,staffCode,"btnEdit"));
         else if(buttonType.equals("disable"))
-            clickElement(getByLocator(BTN_EDIT_DISABLE_USER,staffCode,"btnHighlight"));
+            clickElement(getByLocator(BTN_EDIT_DISABLE,staffCode,"btnHighlight"));
     }
 
 }

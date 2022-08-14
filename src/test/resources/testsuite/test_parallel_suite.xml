@@ -26,6 +26,11 @@
             <class name="com.nashtech.assetmanagement.tests.EditUserTest" />
         </classes>
     </test>
+    <test name="CreateAssetTest">
+        <classes>
+            <class name="com.nashtech.assetmanagement.tests.CreateAssetTest" />
+        </classes>
+    </test>
     <test name="LoginTest">
         <classes>
             <class name="com.nashtech.assetmanagement.tests.LoginTest" />

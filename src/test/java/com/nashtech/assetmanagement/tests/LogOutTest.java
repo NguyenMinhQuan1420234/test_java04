@@ -44,7 +44,7 @@ public class LogOutTest extends BaseTest{
         loginPage.logout();
         loginPage.clickLogoutCancelBtn();
             String actualUsername = homePage.getUserName();
-            assertThat("Verify username", actualUsername, equalTo("adminHCM"));
+            assertThat("Verify username", actualUsername, equalTo("admin"));
     }
 }
 

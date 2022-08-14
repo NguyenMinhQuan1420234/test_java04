@@ -73,28 +73,28 @@ public class CreateUserTest extends BaseTest {
         assertThat(
                 "verify firstname: ",
                 (user.get("firstName").getAsString() +" "+ user.get("lastName").getAsString()),
-                equalTo(detailInformationPage.getUserDetail("Full Name"))
+                equalTo(detailInformationPage.getDetailInformationValue("Full Name"))
         );
 
         assertThat(
                 "verify date of birth: ",
                 convertDateStringToDateStringByFormat(user.get("dateOfBirth").getAsString(), "MM/dd/yyyy"),
-                equalTo(detailInformationPage.getUserDetail("Date Of Birth"))
+                equalTo(detailInformationPage.getDetailInformationValue("Date Of Birth"))
         );
         assertThat(
                 "verify gender: ",
                 user.get("gender").getAsString(),
-                equalTo(detailInformationPage.getUserDetail("Gender"))
+                equalTo(detailInformationPage.getDetailInformationValue("Gender"))
         );
         assertThat(
                 "verify join date: ",
                 convertDateStringToDateStringByFormat(user.get("joinDate").getAsString(),"MM/dd/yyyy"),
-                equalTo(detailInformationPage.getUserDetail("Joined Date"))
+                equalTo(detailInformationPage.getDetailInformationValue("Joined Date"))
         );
         assertThat(
                 "verify type: ",
                 user.get("type").getAsString(),
-                equalTo(detailInformationPage.getUserDetail("Type"))
+                equalTo(detailInformationPage.getDetailInformationValue("Type"))
         );
 
         detailInformationPage.clickClose();
@@ -122,6 +122,6 @@ public class CreateUserTest extends BaseTest {
     @AfterMethod(onlyForGroups = {"1"})
     public void disableCreatedUser() {
         manageUserPage.clickFirstUserButton("disable");
-        alertHandle.clickModalButton("disable-button");
+        alertHandle.clickModalButtonById("disable-button");
     }
 }

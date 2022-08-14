@@ -8,9 +8,7 @@ import com.nashtech.assetmanagement.pages.LoginPage;
 import com.nashtech.assetmanagement.pages.ManageUserPage;
 import com.nashtech.assetmanagement.pages.shared.DetailedInformationPage;
 import com.nashtech.assetmanagement.pages.shared.ModalHandle;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -24,7 +22,7 @@ public class EditUserTest extends BaseTest {
     DetailedInformationPage detailInformationPage;
     ModalHandle alertHandle;
 
-    @BeforeMethod
+    @BeforeMethod()
     public void precondition() {
         loginPage = new LoginPage();
         createUserPage = new CreateUserPage();
@@ -39,62 +37,63 @@ public class EditUserTest extends BaseTest {
         homePage.moveToPage("Manage User");
         homePage.waitLoadingScreen();
         manageUserPage.clickCreateNewUserButton();
+        createUserPage.createUserCustomInput("deptrai","hailua","22/02/2000","Female","22/02/2022","ADMIN");
     }
 
-    @Test(dataProvider = "createUserWithAdminAccount", dataProviderClass = DataProviderUser.class, groups = {"1"})
-    public void editUserSuccessfully(JsonObject user) {
-        createUserPage.createUser(user);
+    @Test(dataProvider = "editUsetData", dataProviderClass = DataProviderUser.class, groups = {"1"})
+    public void editUserSuccessfully(String dateOfBirth, String gender, String joinedDate, String type)  {
+
         manageUserPage.clickFirstUserButton("edit");
         alertHandle.waitLoadingScreen();
-        editUserPage.inputDateOfBirth("09/09/2000");
-        editUserPage.selectGender("Female");
-        editUserPage.inputJoinDate("09/09/2022");
-        editUserPage.selectUserType("STAFF");
+        editUserPage.inputDateOfBirth(dateOfBirth);
+        editUserPage.selectGender(gender);
+        editUserPage.inputJoinDate(joinedDate);
+        editUserPage.selectUserType(type);
         editUserPage.clickSaveButton();
         alertHandle.waitLoadingScreen();
         manageUserPage.clickDetailFirstUser();
 
         assertThat(
                 "verify User Date of Birth:",
-                detailInformationPage.getUserDetail("Date Of Birth"),
+                detailInformationPage.getDetailInformationValue("Date Of Birth"),
                 equalTo("09/09/2000")
         );
         assertThat(
                 "verify User gender:",
-                detailInformationPage.getUserDetail("Gender"),
+                detailInformationPage.getDetailInformationValue("Gender"),
                 equalTo("Female")
         );
         assertThat(
                 "verify User Join date:",
-                detailInformationPage.getUserDetail("Joined Date"),
+                detailInformationPage.getDetailInformationValue("Joined Date"),
                 equalTo("09/09/2022")
         );
         assertThat(
                 "verify User Type:",
-                detailInformationPage.getUserDetail("Type"),
+                detailInformationPage.getDetailInformationValue("Type"),
                 equalTo("STAFF")
         );
         detailInformationPage.clickClose();
     }
 
-    @Test(dataProvider = "createUserAccount", dataProviderClass = DataProviderUser.class, groups = {"1"})
-    public void verifyEditUserCannotEditNameSuccessfully(JsonObject user) {
-        createUserPage.createUser(user);
+    @Test(dataProvider = "editUsetData", dataProviderClass = DataProviderUser.class, groups = {"1"})
+    public void verifyEditUserCannotEditNameSuccessfully(String dateOfBirth, String gender, String joinedDate, String type) {
+
         manageUserPage.clickFirstUserButton("edit");
         alertHandle.waitLoadingScreen();
-        editUserPage.inputDateOfBirth("08/09/2000");
-        editUserPage.selectGender("Female");
-        editUserPage.inputJoinDate("09/09/2022");
-        editUserPage.selectUserType("STAFF");
+        editUserPage.inputDateOfBirth(dateOfBirth);
+        editUserPage.selectGender(gender);
+        editUserPage.inputJoinDate(joinedDate);
+        editUserPage.selectUserType(type);
 
         assertThat(
                 "verify first name field that can not be edit: ",
-                editUserPage.fieldCannotBeEdited("First Name"),
+                editUserPage.isFieldEdited("First Name"),
                 equalTo(true)
         );
         assertThat(
                 "verify last name field that can not be edit: ",
-                editUserPage.fieldCannotBeEdited("Last Name"),
+                editUserPage.isFieldEdited("Last Name"),
                 equalTo(true)
         );
 
@@ -102,9 +101,9 @@ public class EditUserTest extends BaseTest {
 
     }
 
-    @Test(dataProvider = "createUserAccount", dataProviderClass = DataProviderUser.class)
-    public void verifyEditUserClickCancelButtonSuccessfully(JsonObject user) {
-        createUserPage.createUser(user);
+    @Test
+    public void verifyEditUserClickCancelButtonSuccessfully() {
+
         manageUserPage.clickFirstUserButton("edit");
         alertHandle.waitLoadingScreen();
         editUserPage.clickButton("cancel");
@@ -120,6 +119,6 @@ public class EditUserTest extends BaseTest {
     @AfterMethod(onlyForGroups = {"1"})
     public void disableCreatedUser() {
         manageUserPage.clickFirstUserButton("disable");
-        alertHandle.clickModalButton("disable-button");
+        alertHandle.clickModalButtonById("disable-button");
     }
 }

@@ -10,6 +10,7 @@ import static com.nashtech.assetmanagement.utils.JsonUtil.readJsonFile;
 
 public class DataProviderUser {
     static JsonObject userList = readJsonFile("src/test/resources/testdata/user_test_data.json");
+    static JsonObject editData = readJsonFile("src/test/resources/testdata/edit_user_data.json");
 
     @DataProvider(name = "createUserWithAdminAccount")
     public static Object[][] getAccountInformationWithValidPassword() {
@@ -46,7 +47,17 @@ public class DataProviderUser {
                 {admin}, {staff}
         };
     }
+    @DataProvider(name = "editUsetData")
+    public static Object[][] editUserData() {
+        String dateOfBirth = editData.get("dateOfBirth").getAsString();
+        String gender = editData.get("gender").getAsString();
+        String joinedDate = editData.get("joinedDate").getAsString();
+        String type = editData.get("type").getAsString();
 
+        return new Object[][]{
+                {dateOfBirth, gender, joinedDate, type}
+        };
+    }
 
 
 }

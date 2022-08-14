@@ -1,0 +1,13 @@
+{
+  "data1": {
+    "name": "Chuột Cống",
+    "category": "Bluetooth Mouse",
+    "specification": "An input specification",
+    "installedDate": "02/02/2022",
+    "state": "Available"
+  },
+  "data2": {
+    "newCategoryName": "Iphone",
+    "newCategoryPrefix": "Xmas"
+  }
+}

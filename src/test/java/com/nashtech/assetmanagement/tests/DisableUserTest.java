@@ -39,20 +39,15 @@ public class DisableUserTest extends BaseTest {
         homePage.moveToPage("Manage User");
         homePage.waitLoadingScreen();
         manageUserPage.clickCreateNewUserButton();
-        createUserPage.createUser(user);
-        manageUserPage.clickDetailFirstUser();
-        String createdUserStaffCode = detailInformationPage.getUserDetail("Staff Code");
-        detailInformationPage.clickClose();
-        manageUserPage.clickFirstUserButton("disable");
-        alertHandle.clickModalButton("disable-button");
+        createUserPage.createUserDefault(user);
         alertHandle.closeAlert();
-        homePage.waitLoadingScreen();
-        manageUserPage.inputSearchCriteria(createdUserStaffCode);
-        manageUserPage.clickSearchButton();
+        alertHandle.waitLoadingScreen();
+        manageUserPage.clickFirstUserButton("disable");
+        alertHandle.clickModalButtonById("disable-button");
         assertThat(
                 "verify delete user successful: ",
                 alertHandle.getAlertMessageText(),
-                equalTo("No user founded")
+                equalTo("User is disabled")
         );
     }
     @Test(dataProvider = "createUserAccount", dataProviderClass = DataProviderUser.class)
@@ -60,11 +55,11 @@ public class DisableUserTest extends BaseTest {
         homePage.moveToPage("Manage User");
         homePage.waitLoadingScreen();
         manageUserPage.clickCreateNewUserButton();
-        createUserPage.createUser(user);
+        createUserPage.createUserDefault(user);
         manageUserPage.clickDetailFirstUser();
         detailInformationPage.clickClose();
         manageUserPage.clickFirstUserButton("disable");
-        alertHandle.clickModalButton("cancel-button");
+        alertHandle.clickModalButtonById("cancel-button");
 
         assertThat(
                 "verify cancel button works: ",
@@ -79,7 +74,7 @@ public class DisableUserTest extends BaseTest {
         manageUserPage.inputSearchCriteria(user);
         manageUserPage.clickSearchButton();
         manageUserPage.waitForUserAppear(user);
-        manageUserPage.clickDisableUserButton();
+        manageUserPage.clickFirstUserButton("disable");
 
         assertThat(
                 "verify delete user successful: ",
@@ -96,8 +91,8 @@ public class DisableUserTest extends BaseTest {
         manageUserPage.inputSearchCriteria(user);
         manageUserPage.clickSearchButton();
         manageUserPage.waitForUserAppear(user);
-        manageUserPage.clickDisableUserButton();
-        alertHandle.clickModalButton("btnClose");
+        manageUserPage.clickFirstUserButton("disable");
+        alertHandle.clickModalButtonById("btnClose");
 
         assertThat(
                 "verify modal is closed: ",

@@ -9,4 +9,11 @@ public class RandomStringUtil {
         boolean useNumbers = false;
         return RandomStringUtils.random(length, useLetters, useNumbers);
     }
+
+    public static String randomName() {
+        int length = 5;
+        boolean useLetters = true;
+        boolean useNumbers = false;
+        return RandomStringUtils.random(length, useLetters, useNumbers);
+    }
 }

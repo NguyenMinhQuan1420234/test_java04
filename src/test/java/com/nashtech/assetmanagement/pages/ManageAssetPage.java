@@ -1,27 +1,25 @@
 package com.nashtech.assetmanagement.pages;
-
+import static com.nashtech.assetmanagement.pages.shared.TableDataPage.*;
+import com.nashtech.assetmanagement.utils.Pair;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
-public class AssetPage extends BasePage {
+import java.util.List;
+
+public class ManageAssetPage extends BasePage {
 
         /** ------------------ Web Elements ----------------------*/
+        private final Pair<String, String> BTN_ASSET_ORDER = Pair.of("xpath","(//button[@id='%s'])[%s]");
 
         private final By INP_SearchFirstName = By.xpath("//input[@type='text']");
         private final By BTN_Search = By.cssSelector("div.search > div:nth-child(2) > button");
         private final By BTN_Delete = By.cssSelector("div.search > button");
         private final By BTN_Edit = By.cssSelector("div.search > button");
-        private final By BTN_Disable = By.id("#disable-button");
+        private final By BTN_Disable = By.id("disable-button");
 
-        private final By BTN_Cancel = By.id("#cancel-button");
+        private final By BTN_Cancel = By.id("cancel-button");
 
-        private final By DDL_STATE = By.cssSelector("div:nth-child(3) > div.user-list > div.table-board > div.left-board > div > div:nth-child(1)");
-
-        private final By CHK_STATE_ALL = By.xpath("//label[@for='typeAll']");
-        private final By CHK_STATE_ASSIGNED = By.xpath("//label[@for='typeAssigned']");
-        private final By CHK_STATE_AVAILABLE = By.xpath("//label[@for='typeAvailable']");
-        private final By CHK_STATE_NOT_AVAILABLE = By.xpath("//label[@for='typeNotAvailable']");
-        private final By CHK_STATE_WAITING_FOR_RECYCLING = By.xpath("//label[@for='typeWaiting']");
-        private final By CHK_STATE_RECYCLED = By.xpath("//label[@for='typeRecycled']");
+        private final Pair<String, String> DDL_FILTER_OPTION = Pair.of("id", "type%s");
 
         private final By DDL_CATEGORY = By.cssSelector("div:nth-child(3) > div.user-list > div.table-board > div.left-board > div > div:nth-child(2)");
         private final By CHK_CATEGORY_ALL = By.xpath("//label[@for='typeAll']");
@@ -54,7 +52,9 @@ public class AssetPage extends BasePage {
 
 
         /** -------------------- Page Methods ---------------------*/
-
+        public void clickAssetPageButton(String text) {
+                clickButtonByText(text);
+        }
         public void inputAssetName(String assetName) {
                 inputText(TXT_ASSET_NAME, assetName);
         }
@@ -95,13 +95,6 @@ public class AssetPage extends BasePage {
             clickElement(BTN_Cancel);
         }
 
-        public void clickCheckoutStateDropDownList() {clickElement(CHK_STATE_ALL);}
-        public void clickCheckoutAllState() {clickElement(CHK_STATE_ALL);}
-        public void clickCheckoutAssignedState() {clickElement(CHK_STATE_ASSIGNED);}
-        public void clickCheckoutAvailableState() {clickElement(CHK_STATE_AVAILABLE);}
-        public void clickCheckoutNotAvailableState() {clickElement(CHK_STATE_NOT_AVAILABLE);}
-        public void clickCheckoutWaitingState() {clickElement(CHK_STATE_WAITING_FOR_RECYCLING);}
-        public void clickCheckoutRecycledState() {clickElement(CHK_STATE_RECYCLED);}
 
         public void clickCheckoutCategoryDropDownList() {clickElement(DDL_CATEGORY);}
         public void clickCheckoutAllCategory() {clickElement(CHK_CATEGORY_ALL);}
@@ -109,6 +102,16 @@ public class AssetPage extends BasePage {
         public void clickCheckoutMonitorCategorye() {clickElement(CHK_CATEGORY_MONITOR);}
         public void clickCheckoutPersonalCategory() {clickElement(CHK_CATEGORY_PERSONAL_COMPUTER);}
         public void clickCheckoutMouseCategory() {clickElement(CHK_CATEGORY_BLUETOOTH_MOUSE);}
+
+        public void clickAssetDisableButton(int assetIndex, String buttonName) {
+                waitForVisibilityOfElementLocated(getByLocator(BTN_ASSET_ORDER, "btnHighLight", Integer.toString(assetIndex))).click();
+        }
+        public void clickAssetEditButton(int assetIndex, String buttonName) {
+                waitForVisibilityOfElementLocated(getByLocator(BTN_ASSET_ORDER, "btnEdit", Integer.toString(assetIndex))).click();
+        }
+        public void clickDetailAssetInformation() {
+                clickElement(FIRST_USER_NAME);
+        }
 
 
 }

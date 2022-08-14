@@ -37,7 +37,7 @@ public class LoginTest extends BaseTest{
         loginPage.inputPassword(password);
         loginPage.clickLoginBtn();
         String actualUsername = homePage.getUserName();
-        assertThat("Verify username", actualUsername, equalTo("adminHCM"));
+        assertThat("Verify username", actualUsername, equalTo("admin"));
     }
     @Test
     public void loginUnsuccessfullyWithEmptyUsername(){

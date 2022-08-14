@@ -1,5 +1,5 @@
 package com.nashtech.assetmanagement.pages;
-
+import static com.nashtech.assetmanagement.pages.shared.TableDataPage.*;
 import org.openqa.selenium.By;
 
 

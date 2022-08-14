@@ -14,13 +14,13 @@
     "admin": "Admin"
   },
   "searchData": {
-    "staffCode": "SD0016",
+    "staffCode": "SD0005",
     "searchType1": "Staff Code",
-    "firstName": "Ada",
+    "firstName": "viet",
     "searchType2": "Full Name"
   },
   "assignedUser": {
-    "firstName1": "Jeff",
-    "firstName2": "Ada"
+    "firstName1": "Nhu",
+    "firstName2": "viet"
   }
 }
