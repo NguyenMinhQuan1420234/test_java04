@@ -26,11 +26,14 @@ public class VerifyAdminSortCriteriaTest extends BaseTest {
         manageUserPage = new ManageUserPage();
         detailInformationPage = new DetailedInformationPage();
         alertHandle = new ModalHandle();
-        loginPage.loginWithDefaultAccount();
+//        loginPage.loginWithDefaultAccount();
     }
     //Header = {"Staff Code", "Full Name", "Joined Date", "Type"} - sortType = {"ascending", "descending"}
     @Test(dataProvider = "sortHeaderUserData", dataProviderClass = DataProviderSearch.class)
     public void verifyAdminSearchByHeaderCriteria(String sortHeader, String sortType) throws InterruptedException, ParseException {
+        loginPage.loginWithDefaultAccount();
+        //
+
         alertHandle.closeAlert();
         homePage.moveToPage("Manage User");
         homePage.waitLoadingScreen();
@@ -44,6 +47,8 @@ public class VerifyAdminSortCriteriaTest extends BaseTest {
     //Filter = {"All", "Admin", "Staff"}
     @Test(dataProvider = "filterUserData", dataProviderClass = DataProviderSearch.class)
     public void verifyAdminSearchByFilterCriteria(String filterType) throws InterruptedException {
+        loginPage.loginWithDefaultAccount();
+        //
         alertHandle.closeAlert();
         homePage.moveToPage("Manage User");
         homePage.waitLoadingScreen();
@@ -56,6 +61,9 @@ public class VerifyAdminSortCriteriaTest extends BaseTest {
     }
     @Test(dataProvider = "searchData", dataProviderClass = DataProviderSearch.class)
     public void verifyAdminSearchBySearchBarCriteria(String searchData, String searchType) throws InterruptedException {
+        loginPage.loginWithDefaultAccount();
+        //
+
         alertHandle.closeAlert();
         homePage.moveToPage("Manage User");
         homePage.waitLoadingScreen();
@@ -69,6 +77,9 @@ public class VerifyAdminSortCriteriaTest extends BaseTest {
     }
     @Test
     public void verifyAdminCanSeeUserDetailInformationSuccessfully() {
+        loginPage.loginWithDefaultAccount();
+        //
+
         alertHandle.closeAlert();
         homePage.moveToPage("Manage User");
         manageUserPage.clickDetailRandomUser();

@@ -30,17 +30,24 @@ public class CreateAssetTest extends BaseTest {
         createAssetPage = new CreateAssetPage();
         manageAssetPage = new ManageAssetPage();
 
-        loginPage.loginWithDefaultAccount();
-        alertHandle.closeAlert();
-        homePage.moveToPage("Manage Asset");
-        alertHandle.waitLoadingScreen();
-        manageAssetPage.clickAssetPageButton("Create new asset");
+//        loginPage.loginWithDefaultAccount();
+//        alertHandle.closeAlert();
+//        homePage.moveToPage("Manage Asset");
 //        alertHandle.waitLoadingScreen();
+//        manageAssetPage.clickAssetPageButton("Create new asset");
+
+
 
     }
 
     @Test(groups = {"1"},dataProvider = "assetData", dataProviderClass = DataProviderAsset.class)
     public void createAssetSuccessfully(String name, String category, String specification, String installedDate, String state) {
+        loginPage.loginWithDefaultAccount();
+        alertHandle.closeAlert();
+        homePage.moveToPage("Manage Asset");
+        alertHandle.waitLoadingScreen();
+        manageAssetPage.clickAssetPageButton("Create new asset");
+// Before
         createAssetPage.inputName(name);
         createAssetPage.selectCategory(category);
         createAssetPage.inputSpecification(specification);
@@ -72,11 +79,20 @@ public class CreateAssetTest extends BaseTest {
         );
 
         detailInformationPage.clickClose();
+// After
+        manageAssetPage.clickAssetDisableButton(1, "btnHighLight");
+        alertHandle.clickModalButtonByText("Delete");
 
     }
 
     @Test
     public void verifySaveButtonIsNotEnable() {
+        loginPage.loginWithDefaultAccount();
+        alertHandle.closeAlert();
+        homePage.moveToPage("Manage Asset");
+        alertHandle.waitLoadingScreen();
+        manageAssetPage.clickAssetPageButton("Create new asset");
+
         createAssetPage.inputName("Chuột Cống");
 
         assertThat(
@@ -88,6 +104,12 @@ public class CreateAssetTest extends BaseTest {
 
     @Test(dataProvider = "assetNewCategoryData", dataProviderClass = DataProviderAsset.class)
     public void verifyCreateNewCategoryAndPrefixSuccessfully(String newCategoryName, String newCategoryPrefix) {
+        loginPage.loginWithDefaultAccount();
+        alertHandle.closeAlert();
+        homePage.moveToPage("Manage Asset");
+        alertHandle.waitLoadingScreen();
+        manageAssetPage.clickAssetPageButton("Create new asset");
+
         createAssetPage.inputName("Chuột Cống");
         createAssetPage.clickAddNewCateGory();
         createAssetPage.inputNewCategoryName(newCategoryName);
@@ -101,11 +123,11 @@ public class CreateAssetTest extends BaseTest {
         );
     }
 
-    @AfterMethod(onlyForGroups = {"1"})
-    public void cleanUpCreatedAsset() {
-        manageAssetPage.clickAssetDisableButton(1, "btnHighLight");
-        alertHandle.clickModalButtonByText("Delete");
-    }
+//    @AfterMethod(onlyForGroups = {"1"})
+//    public void cleanUpCreatedAsset() {
+//        manageAssetPage.clickAssetDisableButton(1, "btnHighLight");
+//        alertHandle.clickModalButtonByText("Delete");
+//    }
 
 
 }

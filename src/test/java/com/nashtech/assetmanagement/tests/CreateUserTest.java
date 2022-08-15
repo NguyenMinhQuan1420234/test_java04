@@ -29,12 +29,15 @@ public class CreateUserTest extends BaseTest {
         manageUserPage = new ManageUserPage();
         detailInformationPage = new DetailedInformationPage();
         alertHandle = new ModalHandle();
-        loginPage.loginWithDefaultAccount();
-        alertHandle.closeAlert();
+//        loginPage.loginWithDefaultAccount();
+//        alertHandle.closeAlert();
     }
 
     @Test(dataProvider = "createUserWithAdminAccount", dataProviderClass = DataProviderUser.class, groups = {"1"})
     public void createUserSuccessfully(JsonObject user) {
+        loginPage.loginWithDefaultAccount();
+        alertHandle.closeAlert();
+        // Before
         homePage.moveToPage("Manage User");
         homePage.waitLoadingScreen();
         manageUserPage.clickCreateNewUserButton();
@@ -53,10 +56,16 @@ public class CreateUserTest extends BaseTest {
         );
 
         alertHandle.closeAlert();
+        // After
+        manageUserPage.clickFirstUserButton("disable");
+        alertHandle.clickModalButtonById("disable-button");
     }
 
     @Test(dataProvider = "createUserAccount", dataProviderClass = DataProviderUser.class, groups = {"1"})
     public void verifyNewUserAddedToTopOfUserListSuccessfully(JsonObject user) {
+        loginPage.loginWithDefaultAccount();
+        alertHandle.closeAlert();
+        // before
         homePage.moveToPage("Manage User");
         homePage.waitLoadingScreen();
         manageUserPage.clickCreateNewUserButton();
@@ -98,10 +107,17 @@ public class CreateUserTest extends BaseTest {
         );
 
         detailInformationPage.clickClose();
+        //after
+        manageUserPage.clickFirstUserButton("disable");
+        alertHandle.clickModalButtonById("disable-button");
+
     }
 
     @Test(dataProvider = "createUserAccount", dataProviderClass = DataProviderUser.class)
     public void verifyClickCancelButtonBackToManageUserPage(JsonObject user) {
+        loginPage.loginWithDefaultAccount();
+        alertHandle.closeAlert();
+        // before
         homePage.moveToPage("Manage User");
         homePage.waitLoadingScreen();
         manageUserPage.clickCreateNewUserButton();
@@ -119,9 +135,9 @@ public class CreateUserTest extends BaseTest {
                 equalTo("User List")
         );
     }
-    @AfterMethod(onlyForGroups = {"1"})
-    public void disableCreatedUser() {
-        manageUserPage.clickFirstUserButton("disable");
-        alertHandle.clickModalButtonById("disable-button");
-    }
+//    @AfterMethod(onlyForGroups = {"1"})
+//    public void disableCreatedUser() {
+//        manageUserPage.clickFirstUserButton("disable");
+//        alertHandle.clickModalButtonById("disable-button");
+//    }
 }

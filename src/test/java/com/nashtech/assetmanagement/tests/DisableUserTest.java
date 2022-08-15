@@ -30,12 +30,15 @@ public class DisableUserTest extends BaseTest {
         detailInformationPage = new DetailedInformationPage();
         alertHandle = new ModalHandle();
 
-        loginPage.loginWithDefaultAccount();
-        alertHandle.closeAlert();
+//        loginPage.loginWithDefaultAccount();
+//        alertHandle.closeAlert();
     }
     /** ---- Disable = 'disable-button' ; Cancel = 'cancel-button' ; Close = 'btnClose'----*/
     @Test(dataProvider = "createUserAccount", dataProviderClass = DataProviderUser.class)
     public void adminDisableUserSuccessfully(JsonObject user) throws InterruptedException {
+        loginPage.loginWithDefaultAccount();
+        alertHandle.closeAlert();
+        // bf
         homePage.moveToPage("Manage User");
         homePage.waitLoadingScreen();
         manageUserPage.clickCreateNewUserButton();
@@ -51,6 +54,9 @@ public class DisableUserTest extends BaseTest {
     }
     @Test(dataProvider = "createUserAccount", dataProviderClass = DataProviderUser.class)
     public void verifyAdminClickCancelDisableUserModal(JsonObject user) throws InterruptedException {
+        loginPage.loginWithDefaultAccount();
+        alertHandle.closeAlert();
+        // bf
         homePage.moveToPage("Manage User");
         homePage.waitLoadingScreen();
         manageUserPage.clickCreateNewUserButton();
@@ -66,6 +72,9 @@ public class DisableUserTest extends BaseTest {
     }
     @Test(dataProvider = "searchDataForDisableTest", dataProviderClass = DataProviderSearch.class)
     public void verifyAdminCamnotDisableAssignedUser(String user) throws InterruptedException {
+        loginPage.loginWithDefaultAccount();
+        alertHandle.closeAlert();
+        //
         homePage.moveToPage("Manage User");
         homePage.waitLoadingScreen();
         manageUserPage.inputSearchCriteria(user);
@@ -83,6 +92,9 @@ public class DisableUserTest extends BaseTest {
 
     @Test(dataProvider = "searchDataForDisableTest", dataProviderClass = DataProviderSearch.class)
     public void verifyAdminClickCloseDisableAssignedUserModal(String user) throws InterruptedException {
+        loginPage.loginWithDefaultAccount();
+        alertHandle.closeAlert();
+        // bf
         homePage.moveToPage("Manage User");
         homePage.waitLoadingScreen();
         manageUserPage.inputSearchCriteria(user);

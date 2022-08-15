@@ -25,8 +25,7 @@ public class LogOutTest extends BaseTest{
             loginPage = new LoginPage();
             homePage = new HomePage();
             modalHandle = new ModalHandle();
-            username= System.getProperty("USERNAME");
-            password= System.getProperty("PASSWORD");
+
         }
         @Test
         public void logoutSuccessfully(){

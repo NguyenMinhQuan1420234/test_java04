@@ -17,7 +17,7 @@ public class LoginTest extends BaseTest{
     LoginPage loginPage;
     HomePage homePage;
     ModalHandle modalHandle;
-    String username, password;
+
 
     private static final Logger LOGGER = LogManager.getLogger(LoginTest.class);
 
@@ -26,15 +26,14 @@ public class LoginTest extends BaseTest{
         loginPage = new LoginPage();
         homePage = new HomePage();
         modalHandle = new ModalHandle();
-        username= System.getProperty("USERNAME");
-        password= System.getProperty("PASSWORD");
+
     }
     @Test
     public void loginSuccessfullyWithValidAccount() {
         LOGGER.info("loginSuccessfullyWithValidAccount");
         homePage.waitLoadingScreen();
-        loginPage.inputUserName(username);
-        loginPage.inputPassword(password);
+        loginPage.inputUserName(System.getProperty("USERNAME"));
+        loginPage.inputPassword(System.getProperty("PASSWORD"));
         loginPage.clickLoginBtn();
         String actualUsername = homePage.getUserName();
         assertThat("Verify username", actualUsername, equalTo("admin"));
@@ -43,7 +42,7 @@ public class LoginTest extends BaseTest{
     public void loginUnsuccessfullyWithEmptyUsername(){
         LOGGER.info("loginUnsuccessfullyWithEmptyUsername");
         homePage.waitLoadingScreen();
-        loginPage.inputPassword(password);
+        loginPage.inputPassword(System.getProperty("PASSWORD"));
 //        loginPage.clickLoginBtn();
         boolean disabledBtn = loginPage.getLoginBtnDisabled();
         assertThat("Verify disabled",disabledBtn , equalTo(Boolean.TRUE));
@@ -52,7 +51,7 @@ public class LoginTest extends BaseTest{
     public void loginUnsuccessfullyWithEmptyPassword(){
         LOGGER.info("loginUnsuccessfullyWithEmptyPassword");
         homePage.waitLoadingScreen();
-        loginPage.inputUserName(username);
+        loginPage.inputUserName(System.getProperty("USERNAME"));
 //        loginPage.clickLoginBtn();
         boolean LoginMsg = loginPage.getLoginBtnDisabled();
         assertThat("Verify username", LoginMsg, equalTo(Boolean.TRUE));
@@ -62,7 +61,7 @@ public class LoginTest extends BaseTest{
         LOGGER.info("loginUnsuccessfullyWithInvalidUsername");
         homePage.waitLoadingScreen();
         loginPage.inputUserName("hoadoan123456");
-        loginPage.inputPassword(password);
+        loginPage.inputPassword(System.getProperty("PASSWORD"));
         loginPage.clickLoginBtn();
         String errorMsg = loginPage.getErrorMessage();
         assertThat("Verify error message", errorMsg, equalTo("Username or Password Invalid"));
@@ -71,7 +70,7 @@ public class LoginTest extends BaseTest{
     public void loginUnsuccessfullyWithInvalidPassword(){
         LOGGER.info("loginUnsuccessfullyWithInvalidPassword");
         homePage.waitLoadingScreen();
-        loginPage.inputUserName(username);
+        loginPage.inputUserName(System.getProperty("USERNAME"));
         loginPage.inputPassword("Password");
         loginPage.clickLoginBtn();
         String errorMsg = loginPage.getErrorMessage();

@@ -32,17 +32,23 @@ public class EditUserTest extends BaseTest {
         detailInformationPage = new DetailedInformationPage();
         alertHandle = new ModalHandle();
 
+//        loginPage.loginWithDefaultAccount();
+//        alertHandle.closeAlert();
+//        homePage.moveToPage("Manage User");
+//        homePage.waitLoadingScreen();
+//        manageUserPage.clickCreateNewUserButton();
+//        createUserPage.createUserCustomInput("deptrai","hailua","22/02/2000","Female","22/02/2022","ADMIN");
+    }
+
+    @Test(dataProvider = "editUsetData", dataProviderClass = DataProviderUser.class, groups = {"1"})
+    public void editUserSuccessfully(String dateOfBirth, String gender, String joinedDate, String type)  {
         loginPage.loginWithDefaultAccount();
         alertHandle.closeAlert();
         homePage.moveToPage("Manage User");
         homePage.waitLoadingScreen();
         manageUserPage.clickCreateNewUserButton();
         createUserPage.createUserCustomInput("deptrai","hailua","22/02/2000","Female","22/02/2022","ADMIN");
-    }
-
-    @Test(dataProvider = "editUsetData", dataProviderClass = DataProviderUser.class, groups = {"1"})
-    public void editUserSuccessfully(String dateOfBirth, String gender, String joinedDate, String type)  {
-
+// bf
         manageUserPage.clickFirstUserButton("edit");
         alertHandle.waitLoadingScreen();
         editUserPage.inputDateOfBirth(dateOfBirth);
@@ -74,10 +80,20 @@ public class EditUserTest extends BaseTest {
                 equalTo("STAFF")
         );
         detailInformationPage.clickClose();
+        //
+        manageUserPage.clickFirstUserButton("disable");
+        alertHandle.clickModalButtonById("disable-button");
     }
 
     @Test(dataProvider = "editUsetData", dataProviderClass = DataProviderUser.class, groups = {"1"})
     public void verifyEditUserCannotEditNameSuccessfully(String dateOfBirth, String gender, String joinedDate, String type) {
+        loginPage.loginWithDefaultAccount();
+        alertHandle.closeAlert();
+        homePage.moveToPage("Manage User");
+        homePage.waitLoadingScreen();
+        manageUserPage.clickCreateNewUserButton();
+        createUserPage.createUserCustomInput("deptrai","hailua","22/02/2000","Female","22/02/2022","ADMIN");
+        //bf
 
         manageUserPage.clickFirstUserButton("edit");
         alertHandle.waitLoadingScreen();
@@ -98,11 +114,20 @@ public class EditUserTest extends BaseTest {
         );
 
         editUserPage.clickSaveButton();
-
+        //af
+        manageUserPage.clickFirstUserButton("disable");
+        alertHandle.clickModalButtonById("disable-button");
     }
 
     @Test
     public void verifyEditUserClickCancelButtonSuccessfully() {
+        loginPage.loginWithDefaultAccount();
+        alertHandle.closeAlert();
+        homePage.moveToPage("Manage User");
+        homePage.waitLoadingScreen();
+        manageUserPage.clickCreateNewUserButton();
+        createUserPage.createUserCustomInput("deptrai","hailua","22/02/2000","Female","22/02/2022","ADMIN");
+        //bf
 
         manageUserPage.clickFirstUserButton("edit");
         alertHandle.waitLoadingScreen();
@@ -116,9 +141,9 @@ public class EditUserTest extends BaseTest {
 
     }
 
-    @AfterMethod(onlyForGroups = {"1"})
-    public void disableCreatedUser() {
-        manageUserPage.clickFirstUserButton("disable");
-        alertHandle.clickModalButtonById("disable-button");
-    }
+//    @AfterMethod(onlyForGroups = {"1"})
+//    public void disableCreatedUser() {
+//        manageUserPage.clickFirstUserButton("disable");
+//        alertHandle.clickModalButtonById("disable-button");
+//    }
 }
