@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
-<suite name="suite">
+<suite name="suite" >
     <parameter name="browser" value="CHROME"/>
     <test name="CreateUserTest">
         <classes>
