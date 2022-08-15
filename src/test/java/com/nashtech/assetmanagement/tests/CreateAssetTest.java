@@ -35,7 +35,7 @@ public class CreateAssetTest extends BaseTest {
         homePage.moveToPage("Manage Asset");
         alertHandle.waitLoadingScreen();
         manageAssetPage.clickAssetPageButton("Create new asset");
-        alertHandle.waitLoadingScreen();
+//        alertHandle.waitLoadingScreen();
 
     }
 
@@ -47,7 +47,7 @@ public class CreateAssetTest extends BaseTest {
         createAssetPage.inputInstalledDate(installedDate);
         createAssetPage.selectState(state);
         createAssetPage.clickButtonNewAssetPage("Save");
-        alertHandle.closeAlert();
+        alertHandle.waitLoadingScreen();
         manageAssetPage.clickDetailAssetInformation();
 
         assertThat(

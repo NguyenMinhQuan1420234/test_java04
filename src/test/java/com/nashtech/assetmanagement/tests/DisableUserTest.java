@@ -41,7 +41,6 @@ public class DisableUserTest extends BaseTest {
         manageUserPage.clickCreateNewUserButton();
         createUserPage.createUserDefault(user);
         alertHandle.closeAlert();
-        alertHandle.waitLoadingScreen();
         manageUserPage.clickFirstUserButton("disable");
         alertHandle.clickModalButtonById("disable-button");
         assertThat(
@@ -56,8 +55,6 @@ public class DisableUserTest extends BaseTest {
         homePage.waitLoadingScreen();
         manageUserPage.clickCreateNewUserButton();
         createUserPage.createUserDefault(user);
-        manageUserPage.clickDetailFirstUser();
-        detailInformationPage.clickClose();
         manageUserPage.clickFirstUserButton("disable");
         alertHandle.clickModalButtonById("cancel-button");
 
