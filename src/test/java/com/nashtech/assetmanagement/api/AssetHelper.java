@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AssetHelper extends RequestHelper {
-    private String prefixUrl = UrlConstants.BASE_PAGE;
+    private String prefixUrl = APIConstant.BASE_API_PAGE;
 
     public Response createNewAsset(String userToken, String category, String installedDate, String name, String specification, String state) {
         String url = prefixUrl + APIConstant.CREATE_ASSET;

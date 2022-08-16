@@ -65,7 +65,7 @@ public class ChangePasswordTest extends BaseTest {
     public void changePasswordSuccessfully(JsonObject user){
         homePage.waitLoadingScreen();
         loginPage.login(user.get("username").getAsString(), user.get("oldPassword").getAsString());
-        alertHandle.closeAlert();
+        alertHandle.waitForAlertMessageDisappear();
         homePage.changePassword(user.get("oldPassword").getAsString(),user.get("newPassword").getAsString());
 
         assertThat(

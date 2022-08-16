@@ -52,26 +52,26 @@
   },
   "Admin": {
     "username": "admin",
-    "oldPassword": "123456",
-    "newPassword": "123456"
+    "oldPassword": "1234567",
+    "newPassword": "1234567"
   },
   "Staff": {
     "username": "admin",
-    "oldPassword": "123456",
-    "newPassword": "123456"
+    "oldPassword": "1234567",
+    "newPassword": "1234567"
   },
   "AdminByLocation": [
     {
       "username": "admin",
-      "password": "123456"
+      "password": "1234567"
     },
     {
       "username": "admin",
-      "password": "123"
+      "password": "1234567"
     },
     {
       "username": "admin",
-      "password": "123456"
+      "password": "1234567"
     }
   ]
 }
